@@ -73,7 +73,7 @@ namespace AppTesteBinding.ViewModels
             else if (pagina == "Maragogi")
             {
                 ColetaDados(pagina);
-                await Application.Current.MainPage.Navigation.PushAsync(new PageCategoriasMaragogi());
+                await Application.Current.MainPage.Navigation.PushAsync(new View.SecondPages.PageMaragogi());
             }
             else if (pagina == "PageInformacao")
             {
