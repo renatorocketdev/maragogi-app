@@ -7,11 +7,11 @@ using Xamarin.Forms.Xaml;
 namespace AppTesteBinding.View.Maragogi
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PageCategoriasMaragogiDetails : ContentPage
+    public partial class PagePontoDetails : ContentPage
     {
         #region Constructors
 
-        public PageCategoriasMaragogiDetails(CategoriaMaragogi categoriaMaragogi)
+        public PagePontoDetails(CategoriaMaragogi categoriaMaragogi)
         {
             InitializeComponent();
 

@@ -77,7 +77,7 @@
             <BoxView
                 Grid.Row="1"
                 Margin="0,-10,0,0"
-                BackgroundColor="MidnightBlue"
+                BackgroundColor="#309C99"
                 HeightRequest="10"
                 HorizontalOptions="FillAndExpand" />
 
@@ -93,7 +93,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid Padding="15,5,0,5">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto" />
                                     <ColumnDefinition Width="*" />
@@ -101,7 +101,8 @@
 
                                 <Image
                                     Grid.Column="0"
-                                    Margin="5,0,0,0"
+                                    Margin="10,5,0,5"
+                                    Aspect="Fill"
                                     Source="{Binding Foto}"
                                     Style="{StaticResource ImageMenu}" />
                                 <Label
@@ -109,6 +110,13 @@
                                     Margin="10,0,0,0"
                                     Style="{StaticResource LabelMenu}"
                                     Text="{Binding Nome}" />
+
+                                <BoxView
+                                    Grid.ColumnSpan="2"
+                                    Margin="10,0"
+                                    HeightRequest="1.5"
+                                    VerticalOptions="End"
+                                    Color="#EEE" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

@@ -45,7 +45,7 @@ namespace AppTesteBinding.ViewModels
 
             App.Database.DeletePraias();
 
-            ListLocal = new List<Praias>(await new PraiasService().GetPraias());
+            ListLocal = await new PraiasService().GetPraias();
 
             App.Database.SavePraias(ListLocal);
 

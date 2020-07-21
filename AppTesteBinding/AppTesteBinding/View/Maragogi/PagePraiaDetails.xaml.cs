@@ -7,9 +7,9 @@ using Xamarin.Forms.Xaml;
 namespace AppTesteBinding.View.Maragogi
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PagePraiasDetails : ContentPage
+    public partial class PagePraiaDetails : ContentPage
     {
-        public PagePraiasDetails(Praias praias)
+        public PagePraiaDetails(Praias praias)
         {
             InitializeComponent();
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppTesteBinding.ViewModels;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,6 +11,8 @@ namespace AppTesteBinding.View.Maragogi
         public PageHistoriaMaragogiDetails()
         {
             InitializeComponent();
+
+            BindingContext = new HistoriaMaragogiDetailsViewModel();
         }
 
         private void ImageButton_Clicked(object sender, EventArgs e)
