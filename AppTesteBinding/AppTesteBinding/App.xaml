@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    x:Class="AppTesteBinding.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontawesome="clr-namespace:FontAwesome">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--  Font Awesome  -->
+            <OnPlatform x:Key="FontAwesomeBrands" x:TypeArguments="x:String">
+                <On Platform="Android" Value="FontAwesome5Brands.otf#Regular" />
+                <On Platform="iOS" Value="FontAwesome5Brands-Regular" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="FontAwesomeSolid" x:TypeArguments="x:String">
+                <On Platform="Android" Value="FontAwesome5Solid.otf#Regular" />
+                <On Platform="iOS" Value="FontAwesome5Free-Solid" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="FontAwesomeRegular" x:TypeArguments="x:String">
+                <On Platform="Android" Value="FontAwesome5Regular.otf#Regular" />
+                <On Platform="iOS" Value="FontAwesome5Free-Regular" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="HammerFatFont" x:TypeArguments="x:String">
+                <On Platform="Android" Value="HammerFat.ttf#HammerFat" />
+                <On Platform="iOS" Value="Hammer Fat" />
+            </OnPlatform>
+            <!--  Font Awesome  -->
+
+            <!--  Font Awesome Label  -->
+            <Style x:Key="EntryIcon" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="TextColor" Value="#FFF" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="EntryIconVerde" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="TextColor" Value="#309C99" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="EntryIconAzul" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="TextColor" Value="DarkSlateBlue" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="ButtonIcon" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeBrands}" />
+                <Setter Property="FontSize" Value="35" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="TextColor" Value="#FFF" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="ButtonIconVerde" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeBrands}" />
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="TextColor" Value="#309C99" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="ButtonIconAzul" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeBrands}" />
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="TextColor" Value="DarkSlateBlue" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+            <!--  Font Awesome Label  -->
+
+            <!--  Labels  -->
+            <Style x:Key="lblSobreEmpresa" TargetType="Label">
+                <Setter Property="FontSize" Value="Subtitle" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="FontFamily" Value="{StaticResource HammerFatFont}" />
+                <Setter Property="TextColor" Value="#000" />
+            </Style>
+
+            <Style x:Key="lblGridMenu" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="FontFamily" Value="{StaticResource HammerFatFont}" />
+                <Setter Property="TextColor" Value="#3E4095" />
+                <Setter Property="Margin" Value="0,-10,0,0" />
+                <Setter Property="FontSize" Value="Small" />
+            </Style>
+
+            <Style x:Key="lblHorizontalMenu" TargetType="Label">
+                <Setter Property="Margin" Value="0,0,0,5" />
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="FontFamily" Value="{StaticResource HammerFatFont}" />
+                <Setter Property="TextColor" Value="#3E4095" />
+            </Style>
+
+            <Style x:Key="HammerFatBold18VerdeClaro" TargetType="Label">
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="TextColor" Value="#57A695" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="FontFamily" Value="{StaticResource HammerFatFont}" />
+            </Style>
+
+            <Style x:Key="LabelBold15Preto" TargetType="Label">
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="LabelMenu" TargetType="Label">
+                <Setter Property="FontSize">
+                    <Setter.Value>
+                        <OnIdiom
+                            x:TypeArguments="x:Double"
+                            Phone="25"
+                            Tablet="28" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="FontFamily" Value="{StaticResource HammerFatFont}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="#000" />
+            </Style>
+
+            <Style x:Key="LabelConfig" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="FontFamily" Value="{StaticResource HammerFatFont}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="HammerFatLargeBranco" TargetType="Label">
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="TextColor" Value="#FFF" />
+                <Setter Property="FontFamily" Value="{StaticResource HammerFatFont}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="HammerFatAzul" TargetType="Label">
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="TextColor" Value="MidnightBlue" />
+                <Setter Property="FontFamily" Value="{StaticResource HammerFatFont}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="LabelMenuAzul" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="FontFamily" Value="{StaticResource HammerFatFont}" />
+                <Setter Property="TextColor" Value="MidnightBlue" />
+                <Setter Property="Margin" Value="20,5,0,0" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+
+            <Style x:Key="LabelStyleTransparenteVerde" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="FontFamily" Value="Roboto Condensed" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="#309C99" />
+            </Style>
+            <!--  Labels  -->
+
+            <!--  Imagens  -->
+            <Style x:Key="imgPrimeiroMenu" TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            </Style>
+
+            <Style x:Key="imgPrimeiroMenuHorizontal" TargetType="ImageButton">
+                <Setter Property="Margin" Value="0,5,0,0" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            </Style>
+
+            <Style x:Key="LabelSubTitulo" TargetType="Label">
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="TextColor" Value="#000" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="LabelSubTituloInfo" TargetType="Label">
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="TextColor" Value="#000" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+            <!--  Image  -->
+            <Style x:Key="ImageMenu" TargetType="Image">
+                <Setter Property="HeightRequest">
+                    <Setter.Value>
+                        <OnIdiom
+                            x:TypeArguments="x:Double"
+                            Phone="75"
+                            Tablet="100" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="WidthRequest">
+                    <Setter.Value>
+                        <OnIdiom
+                            x:TypeArguments="x:Double"
+                            Phone="75"
+                            Tablet="100" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--  ImageButtom  -->
+            <Style x:Key="ImageVoltar" TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="WidthRequest" Value="50" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+            </Style>
+
+            <Style x:Key="MenuSecundario" TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="HeightRequest" Value="80" />
+                <Setter Property="WidthRequest" Value="80" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="IconeLateral" TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="WidthRequest" Value="30" />
+            </Style>
+
+            <!--  Botões  -->
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="BackgroundColor" Value="#309C99" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="FontFamily" Value="Roboto Condensed" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="#FFF" />
+            </Style>
+
+            <Style x:Key="ButtonStyleNoCorner" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#309C99" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="FontFamily" Value="Roboto Condensed" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="#FFF" />
+            </Style>
+
+            <Style x:Key="ButtonStyleTransparente" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="FontFamily" Value="Roboto Condensed" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="#FFF" />
+            </Style>
+
+            <Style x:Key="ButtonStyleTransparenteVerde" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="FontFamily" Value="Roboto Condensed" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="#309C99" />
+            </Style>
+
+            <Style x:Key="ButtomPrincipal" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#309C99" />
+                <Setter Property="TextColor" Value="#FFF" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="BorderRadius" Value="10" />
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+
+            <Style x:Key="ButtonIcone" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeBrands}" />
+                <Setter Property="FontSize" Value="35" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="#FFF" />
+            </Style>
+
+            <Style x:Key="ButtonIconeVerde" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+                <Setter Property="FontSize" Value="35" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="#309C99" />
+            </Style>
+
+            <Style x:Key="ButtonIconeBrancoFill" TargetType="Button">
+                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="WidthRequest" Value="30" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="BackgroundColor" Value="#3E4095" />
+                <Setter Property="TextColor" Value="#FFF" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

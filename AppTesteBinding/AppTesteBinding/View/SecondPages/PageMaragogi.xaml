@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels1="clr-namespace:AppTesteBinding.ViewModels" xmlns:service="clr-namespace:AppTesteBinding.Service"
+             x:Class="AppTesteBinding.View.MenuPrincipal.PageMaragogi" NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <viewmodels1:MaragogiViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <service:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ListView Grid.Row="3" ItemsSource="{Binding CategoriasLocal}" x:Name="Lista" SeparatorVisibility="None"
+                            CachingStrategy="RecycleElement" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="15, 5, 0, 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="{Binding Icone, Converter={StaticResource ByteArrayToImage}}" Style="{StaticResource ImageMenu}" Margin="10,0,0,0"/>
+                            <Label Grid.Column="1" Text="{Binding SubCategoria}" Style="{StaticResource LabelMenu}"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

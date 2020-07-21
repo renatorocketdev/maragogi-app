@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:viewmodels1="clr-namespace:AppTesteBinding.ViewModels" 
+             xmlns:service="clr-namespace:AppTesteBinding.Service" 
+             xmlns:controls="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions" 
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
+             x:Class="AppTesteBinding.View.MainPages.English.PageMainCategoriaEnglish">
+    <ContentPage.BindingContext>
+        <viewmodels1:MainCategoriasViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <service:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ActivityIndicator Grid.Row="0" IsRunning="{Binding FotoIsBusy}" IsVisible="{Binding FotoIsBusy}" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+            <controls:CarouselViewControl Grid.Row="0" ItemsSource="{Binding Fotos}" x:Name="MainCarouselView">
+                <controls:CarouselViewControl.ItemTemplate>
+                    <OnIdiom x:TypeArguments="DataTemplate">
+                        <OnIdiom.Phone>
+                            <DataTemplate>
+                                <ffimageloading:CachedImage Source="{Binding Foto}" Aspect="AspectFill"/>
+                            </DataTemplate>
+                        </OnIdiom.Phone>
+                        <OnIdiom.Tablet>
+                            <DataTemplate>
+                                <ffimageloading:CachedImage Source="{Binding Foto}" Aspect="Fill" WidthRequest="1300"/>
+                            </DataTemplate>
+                        </OnIdiom.Tablet>
+                    </OnIdiom>
+                </controls:CarouselViewControl.ItemTemplate>
+            </controls:CarouselViewControl>
+
+            <StackLayout Grid.Row="0" HorizontalOptions="Start" VerticalOptions="Start" 
+                                 RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                                 RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
+                <StackLayout.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="10,35" />
+                        <On Platform="Android" Value="10" />
+                    </OnPlatform>
+                </StackLayout.Margin>
+                <ImageButton Source="controleinicio" Clicked="Voltar_Clicked" WidthRequest="50" HeightRequest="50" BackgroundColor="Transparent"/>
+            </StackLayout>
+
+            <Frame Grid.Row="0" BackgroundColor="#FFF" Opacity="0.8" HorizontalOptions="FillAndExpand" VerticalOptions="End" HeightRequest="50" Padding="0"
+                               RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
+                <Label Text="{Binding Categoria}" Style="{StaticResource LabelMenu}" HorizontalOptions="Center" Margin="0"/>
+            </Frame>
+
+            <BoxView Grid.Row="1" BackgroundColor="MidnightBlue" HeightRequest="10" Margin="0,-10,0,0" HorizontalOptions="FillAndExpand"/>
+
+            <ActivityIndicator Grid.Row="2" IsRunning="{Binding CategoriasIsBusy}" IsVisible="{Binding CategoriasIsBusy}" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+            <ListView Grid.Row="2" Margin="0 , 2, 0, 0" ItemsSource="{Binding ListLocal}" SeparatorVisibility="None"
+                            CachingStrategy="RecycleElement" HasUnevenRows="True" ItemTapped="ListView_ItemTapped" x:Name="Lista">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="15, 5, 0, 5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="{Binding Icone, Converter={StaticResource ByteArrayToImage}}" Style="{StaticResource ImageMenu}" Margin="5,0,0,0"/>
+                                <Label Grid.Column="1" Text="{Binding SubCategoriaTranslate}" Style="{StaticResource LabelMenu}" Margin="10,0,0,0"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

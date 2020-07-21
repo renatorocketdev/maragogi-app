@@ -1,0 +1,24 @@
+{
+  "images": [
+    {
+      "scale": "1x",
+      "idiom": "universal",
+      "filename": "IconePrincipal.png"
+    },
+    {
+      "scale": "2x",
+      "idiom": "universal",
+      "filename": "IconePrincipal1.png"
+    },
+    {
+      "scale": "3x",
+      "idiom": "universal",
+      "filename": "IconePrincipal2.png"
+    }
+  ],
+  "properties": {},
+  "info": {
+    "version": 1,
+    "author": ""
+  }
+}

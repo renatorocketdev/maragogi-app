@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AppTesteBinding.View.SecondPages.PageCategoriasMaragogi"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:service="clr-namespace:AppTesteBinding.Service"
+    xmlns:viewmodels="clr-namespace:AppTesteBinding.ViewModels"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+    <ContentPage.BindingContext>
+        <viewmodels:CategoriasMaragogiViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <service:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+
+            <ffimageloading:CachedImage
+                Aspect="AspectFill"
+                HeightRequest="300"
+                Source="maragogifundo" />
+
+            <StackLayout
+                HorizontalOptions="Start"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                       Property=Height}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width}"
+                VerticalOptions="Start">
+                <StackLayout.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="10,35" />
+                        <On Platform="Android" Value="10" />
+                    </OnPlatform>
+                </StackLayout.Margin>
+                <ImageButton
+                    BackgroundColor="Transparent"
+                    Command="{Binding CmdPraias}"
+                    HeightRequest="50"
+                    Source="controleinicio"
+                    WidthRequest="50" />
+            </StackLayout>
+
+            <BoxView
+                Grid.Row="1"
+                Margin="0,-10,0,0"
+                BackgroundColor="#309C99"
+                HeightRequest="10"
+                HorizontalOptions="FillAndExpand" />
+
+            <Grid
+                Grid.Row="2"
+                Margin="10,10,10,0"
+                Padding="0">
+                <Grid Grid.Column="0" HorizontalOptions="FillAndExpand">
+                    <Frame
+                        Padding="0"
+                        BackgroundColor="Azure"
+                        BorderColor="#AAA"
+                        CornerRadius="15"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <ffimageloading:CachedImage Aspect="AspectFill" Source="maragogi.png">
+                            <ffimageloading:CachedImage.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CmdHistoriaMaragogi}" NumberOfTapsRequired="1" />
+                            </ffimageloading:CachedImage.GestureRecognizers>
+                            <ffimageloading:CachedImage.Transformations>
+                                <fftransformations:RoundedTransformation Radius="15" />
+                            </ffimageloading:CachedImage.Transformations>
+                        </ffimageloading:CachedImage>
+                    </Frame>
+                </Grid>
+
+                <Grid Grid.Column="1" HorizontalOptions="FillAndExpand">
+                    <Frame
+                        Padding="0"
+                        BackgroundColor="Azure"
+                        BorderColor="#AAA"
+                        CornerRadius="15"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <ffimageloading:CachedImage Aspect="AspectFill" Source="praias.png">
+                            <ffimageloading:CachedImage.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CmdPraias}" NumberOfTapsRequired="1" />
+                            </ffimageloading:CachedImage.GestureRecognizers>
+                            <ffimageloading:CachedImage.Transformations>
+                                <fftransformations:RoundedTransformation Radius="15" />
+                            </ffimageloading:CachedImage.Transformations>
+                        </ffimageloading:CachedImage>
+
+                    </Frame>
+                </Grid>
+            </Grid>
+
+            <ActivityIndicator
+                Grid.Row="3"
+                IsRunning="{Binding CategoriasIsBusy}"
+                IsVisible="{Binding CategoriasIsBusy}"
+                VerticalOptions="Center" />
+
+            <ListView
+                x:Name="Lista"
+                Grid.Row="3"
+                Margin="0,5,0,0"
+                CachingStrategy="RecycleElement"
+                HasUnevenRows="True"
+                ItemTapped="Lista_ItemTapped"
+                ItemsSource="{Binding ListLocal}"
+                SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                Margin="10,2"
+                                Padding="0"
+                                BorderColor="#AAA"
+                                HasShadow="True">
+                                <Grid Padding="0,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image
+                                        Grid.Column="0"
+                                        Margin="3"
+                                        Aspect="Fill"
+                                        Source="{Binding Icone, Converter={StaticResource ByteArrayToImage}}"
+                                        Style="{StaticResource ImageMenu}" />
+                                    <Label
+                                        Grid.Column="1"
+                                        Margin="10,0,0,0"
+                                        Style="{StaticResource LabelMenu}"
+                                        Text="{Binding Nome}" />
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

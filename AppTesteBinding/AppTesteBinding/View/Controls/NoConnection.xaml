@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:fontawesome="clr-namespace:FontAwesome"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
+             x:Class="AppTesteBinding.View.HasNoAccessInternet.NoConnection">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid BackgroundColor="#309C99">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Margin="10" 
+                       Text="{x:Static fontawesome:FontAwesomeIcons.ArrowCircleLeft}" 
+                       Style="{StaticResource EntryIcon}" 
+                       x:Name="lblVoltar"/>
+                
+                <Label Grid.Column="1" 
+                       Text="{x:Static fontawesome:FontAwesomeIcons.TimesCircle}"
+                       TextColor="#FFF" FontSize="Large"
+                       FontFamily="Roboto Condensed" FontAttributes="Bold"
+                       HorizontalTextAlignment="Center" VerticalOptions="Center" 
+                       Style="{StaticResource ButtonIcon}"/>
+                
+                <Label Grid.Column="2" Margin="10" 
+                       Text="{x:Static fontawesome:FontAwesomeIcons.InternetExplorer}"
+                       Style="{StaticResource ButtonIcon}"/>
+            </Grid>
+
+            <Image Source="logo.png"
+                   HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+
+            <Label Text="OPA, PARECE QUE VOCÊ ESTA SEM CONEXÃO!" 
+                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                    Style="{StaticResource LabelStyleTransparenteVerde}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

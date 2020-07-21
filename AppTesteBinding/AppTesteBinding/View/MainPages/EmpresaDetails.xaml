@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AppTesteBinding.View.Empresas.EmpresaDetails"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:fontawesome="clr-namespace:FontAwesome"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:AppTesteBinding.ViewModels"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+    <ContentPage.BindingContext>
+        <viewmodels:EmpresasDetailsViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="3*" />
+                </Grid.RowDefinitions>
+
+                <!--  Activity para foto de fundo  -->
+                <ActivityIndicator
+                    IsRunning="{Binding FotoIsBusy}"
+                    IsVisible="{Binding FotoIsBusy}"
+                    VerticalOptions="Center" />
+
+                <!--  Carousel para foto de fundo  -->
+                <controls:CarouselViewControl
+                    x:Name="MainCarouselView"
+                    HeightRequest="300"
+                    ItemsSource="{Binding Fotos}">
+
+                    <controls:CarouselViewControl.ItemTemplate>
+                        <OnIdiom x:TypeArguments="DataTemplate">
+
+                            <OnIdiom.Phone>
+                                <DataTemplate>
+                                    <ffimageloading:CachedImage Aspect="AspectFill" Source="{Binding Foto}" />
+
+                                </DataTemplate>
+                            </OnIdiom.Phone>
+                            <OnIdiom.Tablet>
+                                <DataTemplate>
+                                    <ffimageloading:CachedImage
+                                        Aspect="Fill"
+                                        Source="{Binding Foto}"
+                                        WidthRequest="1300" />
+
+                                </DataTemplate>
+                            </OnIdiom.Tablet>
+                        </OnIdiom>
+                    </controls:CarouselViewControl.ItemTemplate>
+                </controls:CarouselViewControl>
+
+                <Frame
+                    Margin="10"
+                    Padding="5"
+                    BackgroundColor="SkyBlue"
+                    HorizontalOptions="End"
+                    Opacity="0.9"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                           Property=Height}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                          Property=Width}"
+                    VerticalOptions="Start"
+                    WidthRequest="30">
+
+                    <Frame.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="iOS" Value="10,35" />
+                            <On Platform="Android" Value="10" />
+                        </OnPlatform>
+                    </Frame.Margin>
+                    <StackLayout>
+                        <ImageButton
+                            Command="{Binding CmdLigar}"
+                            Source="controletelefone"
+                            Style="{StaticResource IconeLateral}" />
+
+                        <ImageButton
+                            x:Name="Comentar"
+                            Clicked="Comentar_Clicked"
+                            Source="controlecurtir"
+                            Style="{StaticResource IconeLateral}" />
+
+                        <ImageButton
+                            Command="{Binding CmdCompartilhar}"
+                            Source="controlecompartilhar"
+                            Style="{StaticResource IconeLateral}" />
+
+                        <ImageButton
+                            Command="{Binding CmdTirarFoto}"
+                            Source="controlepostarfoto"
+                            Style="{StaticResource IconeLateral}" />
+
+                        <ImageButton
+                            Command="{Binding CmdGaleria}"
+                            Source="controlegaleria"
+                            Style="{StaticResource IconeLateral}" />
+                    </StackLayout>
+                </Frame>
+
+                <StackLayout
+                    HorizontalOptions="Start"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                           Property=Height}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                          Property=Width}">
+
+                    <StackLayout.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="iOS" Value="10,35" />
+                            <On Platform="Android" Value="10" />
+                        </OnPlatform>
+                    </StackLayout.Margin>
+                    <ImageButton
+                        Margin="10"
+                        BackgroundColor="Transparent"
+                        Clicked="ImageButton_ClickedAsync"
+                        HeightRequest="50"
+                        Source="controlevoltar"
+                        WidthRequest="50" />
+
+                </StackLayout>
+
+                <StackLayout Grid.Row="2">
+                    <BoxView
+                        BackgroundColor="MidnightBlue"
+                        HeightRequest="10"
+                        HorizontalOptions="FillAndExpand" />
+
+                    <Frame
+                        Margin="0,-10,0,0"
+                        Padding="10"
+                        BackgroundColor="#CCDDE6"
+                        HeightRequest="25">
+
+                        <Label
+                            FontAttributes="Bold"
+                            FontFamily="{StaticResource HammerFatFont}"
+                            FontSize="Title"
+                            HorizontalOptions="Center"
+                            Text="{Binding EmpresaLocal.NomeEmpresa}"
+                            TextColor="DarkSlateBlue" />
+                    </Frame>
+
+                    <!--  Inicio da Grid 3  -->
+                    <!--  Contatos  -->
+                    <StackLayout>
+                        <Label
+                            Margin="10,0,0,0"
+                            FontAttributes="Bold"
+                            FontFamily="{StaticResource HammerFatFont}"
+                            FontSize="Title"
+                            Text="Contatos"
+                            TextColor="DarkSlateBlue" />
+
+                        <BoxView
+                            BackgroundColor="#DDD"
+                            HeightRequest="2"
+                            HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+
+                    <StackLayout Margin="10,0,0,0" Orientation="Horizontal">
+                        <Label Style="{StaticResource EntryIconAzul}" Text="{x:Static fontawesome:FontAwesomeIcons.PhoneSquare}" />
+
+                        <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.Telefone1Empresa}" />
+                    </StackLayout>
+
+                    <StackLayout
+                        Margin="10,0,0,0"
+                        IsVisible="{Binding Telefone2Empresa}"
+                        Orientation="Horizontal">
+                        <Label Style="{StaticResource EntryIconAzul}" Text="{x:Static fontawesome:FontAwesomeIcons.Phone}" />
+
+                        <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.Telefone2Empresa}" />
+                    </StackLayout>
+
+                    <StackLayout
+                        Margin="10,0,0,0"
+                        IsVisible="{Binding Facebook}"
+                        Orientation="Horizontal">
+                        <Label Style="{StaticResource ButtonIconAzul}" Text="{x:Static fontawesome:FontAwesomeIcons.Facebook}" />
+
+                        <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.Facebook}" />
+                    </StackLayout>
+
+                    <StackLayout
+                        Margin="10,0,0,0"
+                        IsVisible="{Binding Instagram}"
+                        Orientation="Horizontal">
+                        <Label Style="{StaticResource ButtonIconAzul}" Text="{x:Static fontawesome:FontAwesomeIcons.Instagram}" />
+
+                        <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.Instagram}" />
+                    </StackLayout>
+
+                    <StackLayout
+                        Margin="10,0,0,0"
+                        IsVisible="{Binding Site}"
+                        Orientation="Horizontal">
+                        <Label Style="{StaticResource ButtonIconAzul}" Text="{x:Static fontawesome:FontAwesomeIcons.InternetExplorer}" />
+
+                        <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.Site}" />
+                    </StackLayout>
+                    <!--  Contatos  -->
+
+                    <!--  Sobre a Empresa  -->
+                    <StackLayout>
+                        <Label
+                            Margin="10,0,0,0"
+                            FontAttributes="Bold"
+                            FontFamily="{StaticResource HammerFatFont}"
+                            FontSize="Title"
+                            Text="Sobre a Empresa"
+                            TextColor="DarkSlateBlue" />
+
+                        <BoxView
+                            BackgroundColor="#DDD"
+                            HeightRequest="2"
+                            HorizontalOptions="FillAndExpand" />
+
+                        <StackLayout Margin="10,0,0,0" Orientation="Horizontal">
+                            <Label Style="{StaticResource EntryIconAzul}" Text="{x:Static fontawesome:FontAwesomeIcons.List}" />
+
+                            <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.SobreEmpresa}" />
+                        </StackLayout>
+                    </StackLayout>
+                    <!--  Sobre a Empresa  -->
+
+                    <!--  Serviços  -->
+                    <StackLayout>
+                        <Label
+                            Margin="10,0,0,0"
+                            FontAttributes="Bold"
+                            FontFamily="{StaticResource HammerFatFont}"
+                            FontSize="Title"
+                            Text="Serviços"
+                            TextColor="DarkSlateBlue" />
+
+                        <BoxView
+                            BackgroundColor="#DDD"
+                            HeightRequest="2"
+                            HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+
+                    <StackLayout Margin="10,0,0,0" Orientation="Horizontal">
+                        <Label Style="{StaticResource EntryIconAzul}" Text="{x:Static fontawesome:FontAwesomeIcons.CheckCircle}" />
+
+                        <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.Serv1}" />
+                    </StackLayout>
+
+                    <StackLayout
+                        Margin="10,0,0,0"
+                        IsVisible="{Binding Serv2IsVisible}"
+                        Orientation="Horizontal">
+
+                        <Label Style="{StaticResource EntryIconAzul}" Text="{x:Static fontawesome:FontAwesomeIcons.CheckCircle}" />
+
+                        <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.Serv2}" />
+                    </StackLayout>
+
+                    <StackLayout
+                        Margin="10,0,0,0"
+                        IsVisible="{Binding Serv3IsVisible}"
+                        Orientation="Horizontal">
+
+                        <Label Style="{StaticResource EntryIconAzul}" Text="{x:Static fontawesome:FontAwesomeIcons.CheckCircle}" />
+
+                        <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.Serv3}" />
+                    </StackLayout>
+
+                    <StackLayout
+                        Margin="10,0,0,0"
+                        IsVisible="{Binding Serv4IsVisible}"
+                        Orientation="Horizontal">
+
+                        <Label Style="{StaticResource EntryIconAzul}" Text="{x:Static fontawesome:FontAwesomeIcons.CheckCircle}" />
+
+                        <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.Serv4}" />
+                    </StackLayout>
+                    <!--  Serviços  -->
+
+                    <!--  Caracteristicas  -->
+                    <StackLayout>
+                        <Label
+                            Margin="10,0,0,0"
+                            FontAttributes="Bold"
+                            FontFamily="{StaticResource HammerFatFont}"
+                            FontSize="Title"
+                            Text="Características"
+                            TextColor="DarkSlateBlue" />
+
+                        <BoxView
+                            BackgroundColor="#DDD"
+                            HeightRequest="2"
+                            HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+
+                    <StackLayout Margin="10,0,0,0" Orientation="Horizontal">
+                        <Label Style="{StaticResource EntryIconAzul}" Text="{x:Static fontawesome:FontAwesomeIcons.CheckCircle}" />
+
+                        <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.Carac1}" />
+                    </StackLayout>
+
+                    <StackLayout
+                        Margin="10,0,0,0"
+                        IsVisible="{Binding Carac2IsVisible}"
+                        Orientation="Horizontal">
+
+                        <Label Style="{StaticResource EntryIconAzul}" Text="{x:Static fontawesome:FontAwesomeIcons.CheckCircle}" />
+
+                        <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.Carac2}" />
+                    </StackLayout>
+
+                    <StackLayout
+                        Margin="10,0,0,0"
+                        IsVisible="{Binding Carac3IsVisible}"
+                        Orientation="Horizontal">
+
+                        <Label Style="{StaticResource EntryIconAzul}" Text="{x:Static fontawesome:FontAwesomeIcons.CheckCircle}" />
+
+                        <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.Carac3}" />
+                    </StackLayout>
+
+                    <StackLayout
+                        Margin="10,0,0,0"
+                        IsVisible="{Binding Carac4IsVisible}"
+                        Orientation="Horizontal">
+
+                        <Label Style="{StaticResource EntryIconAzul}" Text="{x:Static fontawesome:FontAwesomeIcons.CheckCircle}" />
+
+                        <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.Carac4}" />
+                    </StackLayout>
+                    <!--  Caracteristicas  -->
+
+                    <!--  Endereço  -->
+                    <StackLayout>
+                        <Label
+                            Margin="10,0,0,0"
+                            FontAttributes="Bold"
+                            FontFamily="{StaticResource HammerFatFont}"
+                            FontSize="Title"
+                            Text="Endereço"
+                            TextColor="DarkSlateBlue" />
+
+                        <BoxView
+                            BackgroundColor="#DDD"
+                            HeightRequest="2"
+                            HorizontalOptions="FillAndExpand" />
+
+                        <Frame
+                            Margin="5"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <WebView HeightRequest="500" Source="{Binding Endereco}" />
+                        </Frame>
+                    </StackLayout>
+                    <!--  Endereço  -->
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

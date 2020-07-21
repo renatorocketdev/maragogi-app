@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fontawesome="clr-namespace:FontAwesome"
+             x:Class="AppTesteBinding.View.MenuPrincipal.PageInformacao"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Grid BackgroundColor="#309C99">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Margin="10"  Text="{x:Static fontawesome:FontAwesomeIcons.ArrowCircleLeft}" Style="{StaticResource EntryIcon}" x:Name="lblVoltar"/>
+                    <Label Grid.Column="1" Text="CONFIG" TextColor="#FFF" FontFamily="Roboto Condensed" HorizontalTextAlignment="Center" FontSize="Large" VerticalOptions="Center" FontAttributes="Bold"/>
+                    <Label Grid.Column="2" Margin="10"  Text="{x:Static fontawesome:FontAwesomeIcons.InfoCircle}" Style="{StaticResource EntryIcon}"/>
+                </Grid>
+
+                <StackLayout Margin="0,-7,0,0">
+                    <StackLayout HeightRequest="35" Orientation="Horizontal">
+                        <Frame BackgroundColor="#91D8F7" Padding="2" HorizontalOptions="FillAndExpand">
+                            <Label Text="Segurança" HorizontalOptions="Center" Style="{StaticResource LabelMenu}"/>
+                        </Frame>
+                    </StackLayout>
+                    
+                    <StackLayout>
+                        <Label Text="Policia Militar: (82) 3296-1000" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Guarda  Mun.: (82) 3296-1000" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Policia Civil: (82) 3296-1000" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Bombeiro: (82) 3296-1000" Style="{StaticResource LabelSubTituloInfo}"/>
+                    </StackLayout>
+
+                    <StackLayout HeightRequest="35" Orientation="Horizontal">
+                        <Frame BackgroundColor="#91D8F7" Padding="2" HorizontalOptions="FillAndExpand">
+                            <Label Text="Saúde" HorizontalOptions="Center" Style="{StaticResource LabelMenu}"/>
+                        </Frame>
+                    </StackLayout>
+                    
+                    <StackLayout>
+                        <Label Text="Secretaria Saude: (82) 3296-1000" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Posto de saúde: (82) 3296-1000" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="UPA: (82) 3296-1000" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Samu: (82) 3296-1000" Style="{StaticResource LabelSubTituloInfo}"/>
+                    </StackLayout>
+
+                    <StackLayout HeightRequest="35" Orientation="Horizontal">
+                        <Frame BackgroundColor="#91D8F7" Padding="2" HorizontalOptions="FillAndExpand">
+                            <Label Text="Banco" HorizontalOptions="Center" Style="{StaticResource LabelMenu}"/>
+                        </Frame>
+                    </StackLayout>
+                    
+                    <StackLayout>
+                        <Label Text="Banco do Bradesco: (82) 3296-2348" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Banco do Brasil:(82) 3296-1211" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Banco do Nordeste: (82) 3296-2595" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Caixa Econômica: (82) 3296-1253" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Banco 24 Horas: Posto Auto Café" Style="{StaticResource LabelSubTituloInfo}"/>
+                    </StackLayout>
+
+                    <StackLayout HeightRequest="35" Orientation="Horizontal">
+                        <Frame BackgroundColor="#91D8F7" Padding="2" HorizontalOptions="FillAndExpand">
+                            <Label Text="Secretaria Saúde" HorizontalOptions="Center" Style="{StaticResource LabelMenu}"/>
+                        </Frame>
+                    </StackLayout>
+                    
+                    <StackLayout>
+                        <Label Text="Sec. de Saúde - Posto Médico: (82) 3296-2338" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Sec. de Saúde - PSF: (82) 3296-1282" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Sec. de Sáude - PSF Peroba: (82) 3296-2551" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Sec. de Sáude: (82) 3296-2284" Style="{StaticResource LabelSubTituloInfo}"/>
+                    </StackLayout>
+
+                    <StackLayout HeightRequest="35" Orientation="Horizontal">
+                        <Frame BackgroundColor="#91D8F7" Padding="2" HorizontalOptions="FillAndExpand">
+                            <Label Text="Secretaria de Assistência" HorizontalOptions="Center" Style="{StaticResource LabelMenu}"/>
+                        </Frame>
+                    </StackLayout>
+                    
+                    <StackLayout>
+                        <StackLayout>
+                            <Label Text="Sec. de Assistência Social - Cons. Tutelar: (82) 3296-2394" Style="{StaticResource LabelSubTituloInfo}"/>
+                            <Label Text="Sec. de Assistência Social - CRAS: (82) 3296-2390" Style="{StaticResource LabelSubTituloInfo}"/>
+                            <Label Text="Sec. de Assistência Social - Gab: (82) 3296-2362" Style="{StaticResource LabelSubTituloInfo}"/>
+                            <Label Text="Sec. de Assistência Social: (82) 3296-2494" Style="{StaticResource LabelSubTituloInfo}"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout HeightRequest="35" Orientation="Horizontal">
+                        <Frame BackgroundColor="#91D8F7" Padding="2" HorizontalOptions="FillAndExpand">
+                            <Label Text="Secretaria de Educação" HorizontalOptions="Center" Style="{StaticResource LabelMenu}"/>
+                        </Frame>
+                    </StackLayout>
+                    
+                    <StackLayout>
+                        <Label Text="Sec. de Educação - Sede: (82) 3296-2188" Style="{StaticResource LabelSubTituloInfo}"/>
+                    </StackLayout>
+
+                    <StackLayout HeightRequest="35" Orientation="Horizontal">
+                        <Frame BackgroundColor="#91D8F7" Padding="2" HorizontalOptions="FillAndExpand">
+                            <Label Text="Secretaria do Turismo" HorizontalOptions="Center" Style="{StaticResource LabelMenu}"/>
+                        </Frame>
+                    </StackLayout>
+                    
+                    <StackLayout>
+                        <Label Text="Sec. De Turismo - CAT: (82) 3296-1718" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Sec. de Turismo - Sede: (82) 3296-2261" Style="{StaticResource LabelSubTituloInfo}"/>
+                    </StackLayout>
+
+                    <StackLayout HeightRequest="35" Orientation="Horizontal">
+                        <Frame BackgroundColor="#91D8F7" Padding="2" HorizontalOptions="FillAndExpand">
+                            <Label Text="Secretaria de Meio Ambiente" HorizontalOptions="Center" Style="{StaticResource LabelMenu}"/>
+                        </Frame>
+                    </StackLayout>
+                    
+                    <StackLayout>
+                        <Label Text="Sec. de Meio Ambiente: (82) 3296-2516" Style="{StaticResource LabelSubTituloInfo}"/>
+                    </StackLayout>
+
+                    <StackLayout HeightRequest="35" Orientation="Horizontal">
+                        <Frame BackgroundColor="#91D8F7" Padding="2" HorizontalOptions="FillAndExpand">
+                            <Label Text="IPREV" HorizontalOptions="Center" Style="{StaticResource LabelMenu}"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Instituto de Previdência - IPREV: (82) 3296-2034" Style="{StaticResource LabelSubTituloInfo}"/>
+                    </StackLayout>
+
+                    <StackLayout HeightRequest="35" Orientation="Horizontal">
+                        <Frame BackgroundColor="#91D8F7" Padding="2" HorizontalOptions="FillAndExpand">
+                            <Label Text="SMTT" HorizontalOptions="Center" Style="{StaticResource LabelMenu}"/>
+                        </Frame>
+                    </StackLayout>
+                    
+                    <StackLayout>
+                        <Label Text="SMTT: (82) 3296-2047" Style="{StaticResource LabelSubTituloInfo}"/>
+                    </StackLayout>
+
+                    <StackLayout HeightRequest="35" Orientation="Horizontal">
+                        <Frame BackgroundColor="#91D8F7" Padding="2" HorizontalOptions="FillAndExpand">
+                            <Label Text="Secretaria/Orgão" HorizontalOptions="Center" Style="{StaticResource LabelMenu}"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Diretoria de Licitações e Contratos - CPL: (82) 3296-2263" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Coord. Munic. da Juventude e Protocolo: (82) 3296-2311" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Sec. de Prot. e Def. Soc. - Guarda Mun.: (82) 3296-2561" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Sec. de Prot. e Def. Soc. - Defesa Civil: (82) 3296-2201" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Gab. do Prefeito - Chefe de Gabinete: (82) 3296-2008" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Universidade Aberta do Brasil - Uab: (82) 3296-1707" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Inst de Planej. e Pesquisa - IPUMA: (82) 3296-2524" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Instituto de Previdência - IPREV: (82) 3296-2034" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Sec. de Prot. e Def. Soc. - Sede: (82) 3296-2230" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Sec. de Relações Institucionais: (82) 3296-2062" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Sec. de Administração - Gab: (82) 3296-2471" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Sec. de Administração - RH: (82) 3296-2219" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Gab. do Prefeito - Recpção: (82) 3296-2053" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Diretoria de Contabilidade: (82) 3296-2099" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Sec. de Trabalho - CAET: (82) 3296-2104 " Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Sec. de Trabalho - Sede: (82) 3296-2033" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Coord. Munic. da Mulher: (82) 3296-2082" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Sec. de Infraestrutura: (82) 3296-2077" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Gab. da Vice-Prefeita: (82) 3296-2347" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Sec. de Planejamento: (82) 3296-2105" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Procuradoria Geral: (82) 3296-2527" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Sec. de Agriltura: (82) 3296-2361" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Gab. do Prefeito: (82) 3296-2050" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Ouvidoria Geral: (82) 3296-2285" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Sec. de Cultura: (82) 3296-2039" Style="{StaticResource LabelSubTituloInfo}"/>
+                        <Label Text="Junta Militar: (82) 3296-2335" Style="{StaticResource LabelSubTituloInfo}"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

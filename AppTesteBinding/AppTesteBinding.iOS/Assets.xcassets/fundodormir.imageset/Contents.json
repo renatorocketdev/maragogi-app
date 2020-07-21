@@ -1,0 +1,24 @@
+{
+  "images": [
+    {
+      "scale": "1x",
+      "idiom": "universal",
+      "filename": "fundodormir.jpg"
+    },
+    {
+      "scale": "2x",
+      "idiom": "universal",
+      "filename": "fundodormir1.jpg"
+    },
+    {
+      "scale": "3x",
+      "idiom": "universal",
+      "filename": "fundodormir2.jpg"
+    }
+  ],
+  "properties": {},
+  "info": {
+    "version": 1,
+    "author": ""
+  }
+}

@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AppTesteBinding.View.HasAccessInternet.Business.SubCategoriasPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:service="clr-namespace:AppTesteBinding.Service"
+    xmlns:viewmodels="clr-namespace:AppTesteBinding.ViewModels"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+    <ContentPage.BindingContext>
+        <viewmodels:SubCategoriasViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <service:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ActivityIndicator
+                Grid.Row="0"
+                IsRunning="{Binding FotoIsBusy}"
+                IsVisible="{Binding FotoIsBusy}"
+                VerticalOptions="Center" />
+
+            <controls:CarouselViewControl
+                x:Name="MainCarouselView"
+                Grid.Row="0"
+                ItemsSource="{Binding Fotos}">
+                <controls:CarouselViewControl.ItemTemplate>
+                    <OnIdiom x:TypeArguments="DataTemplate">
+                        <OnIdiom.Phone>
+                            <DataTemplate>
+                                <ffimageloading:CachedImage Aspect="AspectFill" Source="{Binding Foto}" />
+                            </DataTemplate>
+                        </OnIdiom.Phone>
+                        <OnIdiom.Tablet>
+                            <DataTemplate>
+                                <ffimageloading:CachedImage
+                                    Aspect="Fill"
+                                    Source="{Binding Foto}"
+                                    WidthRequest="1300" />
+                            </DataTemplate>
+                        </OnIdiom.Tablet>
+                    </OnIdiom>
+                </controls:CarouselViewControl.ItemTemplate>
+            </controls:CarouselViewControl>
+
+            <StackLayout
+                HorizontalOptions="Start"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                       Property=Height}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width}"
+                VerticalOptions="Start">
+                <StackLayout.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="10,40" />
+                        <On Platform="Android" Value="10" />
+                    </OnPlatform>
+                </StackLayout.Margin>
+
+                <ImageButton
+                    BackgroundColor="Transparent"
+                    Clicked="Voltar_Clicked"
+                    HeightRequest="50"
+                    Source="controleinicio"
+                    WidthRequest="50" />
+            </StackLayout>
+
+            <Frame
+                Padding="0"
+                BackgroundColor="#FFF"
+                HeightRequest="50"
+                HorizontalOptions="FillAndExpand"
+                Opacity="0.8"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                       Property=Height}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width}"
+                VerticalOptions="End">
+
+                <Label
+                    Margin="0"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource LabelMenu}"
+                    Text="{Binding Categoria}" />
+            </Frame>
+
+            <BoxView
+                Grid.Row="1"
+                Margin="0,-10,0,-1"
+                BackgroundColor="MidnightBlue"
+                HeightRequest="10"
+                HorizontalOptions="FillAndExpand" />
+
+            <ActivityIndicator
+                Grid.Row="2"
+                IsRunning="{Binding CategoriasIsBusy}"
+                IsVisible="{Binding CategoriasIsBusy}"
+                VerticalOptions="Center" />
+
+            <Grid
+                Grid.Row="2"
+                IsVisible="{Binding HasNoEnterprises}"
+                RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Image
+                    Grid.Row="0"
+                    Margin="0,40,0,0"
+                    Source="logo.png" />
+
+                <Label
+                    Grid.Row="1"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource LabelStyleTransparenteVerde}"
+                    Text="Ainda Não Temos Empresas Nesse Setor"
+                    VerticalOptions="Center" />
+            </Grid>
+
+
+
+            <ListView
+                x:Name="Lista"
+                Grid.Row="2"
+                CachingStrategy="RecycleElement"
+                HasUnevenRows="True"
+                ItemTapped="Lista_ItemTapped"
+                ItemsSource="{Binding ListLocal}"
+                SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <ffimageloading:CachedImage
+                                    Grid.Column="0"
+                                    Margin="10"
+                                    HeightRequest="75"
+                                    Source="{Binding Icone, Converter={StaticResource ByteArrayToImage}}"
+                                    WidthRequest="75">
+                                    <ffimageloading:CachedImage.Transformations>
+                                        <fftransformations:CircleTransformation />
+                                    </ffimageloading:CachedImage.Transformations>
+                                </ffimageloading:CachedImage>
+
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label
+                                        Margin="0,5,0,0"
+                                        Style="{StaticResource LabelMenu}"
+                                        Text="{Binding NomeEmpresa}" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Style="{StaticResource LabelSubTitulo}"
+                                        Text="{Binding Endereco}"
+                                        VerticalOptions="End" />
+                                    <Label
+                                        Grid.Row="2"
+                                        Style="{StaticResource LabelSubTitulo}"
+                                        Text="{Binding Telefone1Empresa}"
+                                        VerticalOptions="End" />
+                                </Grid>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

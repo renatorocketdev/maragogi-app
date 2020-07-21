@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:video="clr-namespace:AppTesteBinding.Video"
+             x:Class="AppTesteBinding.View.MenuPrincipal.TrTecnologias"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="250"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="auto"/>
+
+                </Grid.RowDefinitions>
+
+                <RelativeLayout Grid.Row="0">
+                    <Image Aspect="Fill" Source="fundotrtecnologiamain"
+                       RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}"/>
+
+                    <Grid Margin="10"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <ImageButton x:Name="imgbtnVoltar" Clicked="ImgbtnVoltar_Clicked" 
+                        Grid.Column="0" Source="controleinicio" Style="{StaticResource ImageVoltar}"/>
+                    </Grid>
+                </RelativeLayout>
+
+                <Grid Margin="-6" Grid.Row="1" BackgroundColor="#3E4095"></Grid>
+                <Grid Margin="-4" Grid.Row="2" BackgroundColor="#91D8F7"></Grid>
+
+                <Grid Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Source="iconmanutencao" VerticalOptions="Center" HeightRequest="70" WidthRequest="70" Margin="5"/>
+
+                        <StackLayout Grid.Column="1">
+                            <Label Text="Manutenção de Computadores" Style="{StaticResource HammerFatAzul}"/>
+                            <Label Text="Com profissionais qualificado garantindo um serviço de excelente qualidade."/>
+                        </StackLayout>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Source="iconsite" VerticalOptions="Center" HeightRequest="70" WidthRequest="70" Margin="5"/>
+
+                        <StackLayout Grid.Column="1">
+                            <Label Text="Criação de Site" Style="{StaticResource HammerFatAzul}"/>
+                            <Label Text="Oferecendo sempre o melhor para os nossos clientes e tirando sua ideia do papel."/>
+                        </StackLayout>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Source="iconaplicativo"  VerticalOptions="Center" HeightRequest="70" WidthRequest="70" Margin="5"/>
+
+                        <StackLayout Grid.Column="1">
+                            <Label Text="Criação de Aplicativos" Style="{StaticResource HammerFatAzul}"/>
+                            <Label Text="Um aplicativo bem desenvolvido permite que seu público acesse o seu negócio a partir de qualquer hora ou qualquer lugar."/>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+
+                <Frame Grid.Row="4" Padding="0" Margin="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackLayout BackgroundColor="MidnightBlue">
+                            <Label Text="Sistema Fiscais para Lojas" Style="{StaticResource HammerFatLargeBranco}" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"/>
+                        </StackLayout>
+
+                        <!--<video:VideoPlayer Grid.Row="1" Source="https://www.youtube.com/watch?v=Vz8BpHsBqf0" AutoPlay="True" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>-->
+                        <WebView Margin="0,-6,0,0" Grid.Row="1" Source="https://www.youtube.com/embed/Vz8BpHsBqf0" WidthRequest="150" HeightRequest="250">
+                            
+                        </WebView>
+                    </Grid>
+                </Frame>
+            </Grid>
+        </ScrollView>
+        
+    </ContentPage.Content>
+</ContentPage>

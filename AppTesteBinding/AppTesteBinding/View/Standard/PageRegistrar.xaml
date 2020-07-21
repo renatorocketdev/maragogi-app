@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fontawesome="clr-namespace:FontAwesome"
+             xmlns:behavior="clr-namespace:AppTesteBinding.Utils"
+             xmlns:viewmodels="clr-namespace:AppTesteBinding.ViewModels"
+             x:Class="AppTesteBinding.View.PageRegistrar" NavigationPage.HasNavigationBar="False"
+             BackgroundImage="FundoLogin.png">
+    <ContentPage.BindingContext>
+        <viewmodels:ControleViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <BoxView Grid.Column="0" BackgroundColor="#42C0C1" HeightRequest="5" VerticalOptions="Center" HorizontalOptions="FillAndExpand" CornerRadius="30" Margin="30,0,0,0"/>
+                    <Image Grid.Column="1" HorizontalOptions="Center" Source="iconeprincipal"/>
+                    <BoxView Grid.Column="2" BackgroundColor="#42C0C1" HeightRequest="5" VerticalOptions="Center" HorizontalOptions="FillAndExpand" CornerRadius="30" Margin="0,0,30,0"/>
+                </Grid>
+
+                <StackLayout VerticalOptions="Start" Margin="0,-20,0,0">
+                    <Label Style="{StaticResource HammerFatBold18VerdeClaro}" Text="APP MARAGOGI!"/>
+                </StackLayout>
+
+                <!-- Campos -->
+                <Frame VerticalOptions="FillAndExpand" BackgroundColor="#9AD7D9" Margin="10,0">
+                    <StackLayout>
+                        <Grid VerticalOptions="Start">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Text="{x:Static fontawesome:FontAwesomeIcons.User}" Style="{StaticResource EntryIcon}"/>
+                            <Entry PlaceholderColor="#EEE" Grid.Row="0" Grid.Column="1" Placeholder="Digite seu Nome..." Text="{Binding Usuario}"/>
+
+                            <Label Grid.Row="1" Grid.Column="0" Text="{x:Static fontawesome:FontAwesomeIcons.Lock}" Style="{StaticResource EntryIcon}"/>
+                            <Entry PlaceholderColor="#EEE" x:Name="SenhaCad" Grid.Row="1" Grid.Column="1" Placeholder="Digite sua Senha..." IsPassword="True" Text="{Binding Senha}"/>
+
+                            <Label Grid.Row="2" Grid.Column="0" Text="{x:Static fontawesome:FontAwesomeIcons.MailBulk}" Style="{StaticResource EntryIcon}"/>
+                            <Entry PlaceholderColor="#EEE" x:Name="EmailCad" Grid.Row="2" Grid.Column="1" Placeholder="Digite seu Email..." Keyboard="Email" Text="{Binding Email}"/>
+
+                            <Label Grid.Row="3" Grid.Column="0" Text="{x:Static fontawesome:FontAwesomeIcons.Phone}" Style="{StaticResource EntryIcon}"/>
+                            <Entry PlaceholderColor="#EEE" x:Name="TelefoneCad" Grid.Row="3" Grid.Column="1" Placeholder="Digite seu Telefone..." Keyboard="Telephone" Text="{Binding Telefone}">
+                                <Entry.Behaviors>
+                                    <behavior:MaskedBehavior Mask="(XX) X XXXX-XXXX"/>
+                                </Entry.Behaviors>
+                            </Entry>
+
+                            <Button Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource ButtonStyle}" Command="{Binding CmdEfetuarCadastro}" Text="{Binding Confirmar}"/>
+                        </Grid>
+
+                        <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="#FFF" Margin="0,10,0,0"/>
+                        <Button Style="{StaticResource ButtonStyleTransparente}" Command="{Binding CmdNavigation}" CommandParameter="RegistrarLogin" Text="{Binding Voltar}" VerticalOptions="Start"/>
+                    </StackLayout>
+                    
+                </Frame>
+                <StackLayout HeightRequest="10">
+
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+        <!--<Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <BoxView Grid.Column="0" BackgroundColor="#42C0C1" HeightRequest="5" VerticalOptions="Center" HorizontalOptions="FillAndExpand" CornerRadius="30" Margin="30,0,0,0"/>
+                <Image Grid.Column="1" Source="IconePrincipal.png" HorizontalOptions="Center"/>
+                <BoxView Grid.Column="2" BackgroundColor="#42C0C1" HeightRequest="5" VerticalOptions="Center" HorizontalOptions="FillAndExpand" CornerRadius="30" Margin="0,0,30,0"/>
+            </Grid>
+
+            <Label Grid.Row="1" x:Name="lblRegistrar" Style="{StaticResource LabelMenuAzul}" HorizontalOptions="Center"/>
+
+            <Frame Grid.Row="2" VerticalOptions="FillAndExpand" BackgroundColor="#9AD7D9" Margin="20,0">
+                <StackLayout VerticalOptions="FillAndExpand">
+                    <Frame OutlineColor="#ccc" Padding="0" Margin="20, 0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" WidthRequest="50" Aspect="AspectFill" Source="User.png"/>
+                            <local:CustomEntry Grid.Column="1" HeightRequest="40" Margin="10" x:Name="NomeCad" Placeholder="Nome" PlaceholderColor="#CCC"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame OutlineColor="#ccc" Padding="0" Margin="20, 0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" WidthRequest="50" Aspect="AspectFill" Source="Senha.png"/>
+                            <local:CustomEntry Grid.Column="1" HeightRequest="40" Margin="10" x:Name="SenhaCad" IsPassword="True" Placeholder="Senha" PlaceholderColor="#CCC"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame OutlineColor="#ccc" Padding="0" Margin="20, 0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" WidthRequest="50" Aspect="AspectFill" Source="Email.png"/>
+                            <local:CustomEntry Grid.Column="1" HeightRequest="40" Margin="10" x:Name="EmailCad" Keyboard="Email" Placeholder="Email" PlaceholderColor="#CCC"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame OutlineColor="#ccc" Padding="0" Margin="20, 0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" WidthRequest="50" Aspect="AspectFill" Source="Telefone.png"/>
+                            <local:CustomEntry Grid.Column="1" HeightRequest="40" Margin="10" x:Name="TelefoneCad"  Keyboard="Telephone" Placeholder="Telefone" PlaceholderColor="#CCC">
+                                <local:CustomEntry.Behaviors>
+                                    <behavior:MaskedBehavior Mask="(XX) X XXXX-XXXX"/>
+                                </local:CustomEntry.Behaviors>
+                            </local:CustomEntry>
+                        </Grid>
+                    </Frame>
+
+                    <StackLayout Grid.Row="3" Orientation="Horizontal" VerticalOptions="End">
+                        <Button x:Name="btnConfRegistro" Clicked="BtnConfRegistro_Clicked" Style="{StaticResource ButtomPrincipal}" HorizontalOptions="FillAndExpand"/>
+                        <Button x:Name="btnVoltar" Clicked="BtnVoltar_Clicked" Style="{StaticResource ButtomPrincipal}" HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </Grid>-->
+    </ContentPage.Content>
+</ContentPage>

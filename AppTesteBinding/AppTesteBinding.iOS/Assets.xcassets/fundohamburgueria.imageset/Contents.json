@@ -1,0 +1,24 @@
+{
+  "images": [
+    {
+      "scale": "1x",
+      "idiom": "universal",
+      "filename": "fundohamburgueria.jpg"
+    },
+    {
+      "scale": "2x",
+      "idiom": "universal",
+      "filename": "fundohamburgueria1.jpg"
+    },
+    {
+      "scale": "3x",
+      "idiom": "universal",
+      "filename": "fundohamburgueria2.jpg"
+    }
+  ],
+  "properties": {},
+  "info": {
+    "version": 1,
+    "author": ""
+  }
+}
