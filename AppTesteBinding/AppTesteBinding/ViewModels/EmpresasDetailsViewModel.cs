@@ -140,6 +140,30 @@ namespace AppTesteBinding.ViewModels
         public ICommand CmdTirarFoto { get; }
         public ICommand CmdGaleria { get; }
 
+        public ICommand CmdAvaliar { get { return new Command(async (x) => await AvaliarEmpresa()); } }
+
+        private async Task AvaliarEmpresa()
+        {
+            var result = await Application.Current.MainPage
+                .DisplayPromptAsync("Deseja Curtir " + EmpresaLocal.NomeEmpresa + "?", "De uma nota de 0 a 10",
+                accept: "Curtir", maxLength: 2, keyboard: Keyboard.Numeric);
+
+            if (Convert.ToDouble(result) > 10)
+            {
+                await Application.Current.MainPage.DisplayAlert("Erro na avaliação", "Você digitou uma nota invalida. \nPor favor digite novamente uma nova valida!", "Ok");
+            }
+            else
+            {
+                var avaliacao = new AvaliacaoEmpresa
+                {
+                    id = EmpresaLocal.IdEmpresa,
+                    Nota = Convert.ToDouble(result)
+                };
+
+                await new AvaliacaoService().Save(avaliacao);
+            }
+        }
+
         public EmpresasDetailsViewModel()
         {
             

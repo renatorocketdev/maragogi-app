@@ -38,14 +38,6 @@ namespace AppTesteBinding.View.Empresas
             });
         }
 
-        private void Comentar_Clicked(object sender, EventArgs e)
-        {
-            DisplayAlert("Em Breve", "Logo vamos atualizar essa função", "Ok");
-
-            //string filtro = string.Format("Empresa={0}", nomeEmpresa);
-            //Navigation.PushAsync(new PageTeste(filtro, nomeEmpresa, Utils.Settings.Usuario, categoriaEmpresa));
-        }
-
         private async void ImageButton_ClickedAsync(object sender, EventArgs e) => await Navigation.PopAsync();
 
     }
