@@ -21,7 +21,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
                 <!--  Activity para foto de fundo  -->
@@ -151,6 +151,40 @@
                     </Frame>
 
                     <!--  Inicio da Grid 3  -->
+                    <!--  Vídeo  -->
+                    <StackLayout Margin="5" IsVisible="{Binding HasVideo}">
+                        <StackLayout Orientation="Horizontal">
+                            <Label
+                                Margin="10"
+                                FontSize="18"
+                                Style="{StaticResource EntryIconAzul}"
+                                Text="{x:Static fontawesome:FontAwesomeIcons.Video}" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="20"
+                                Text="Vídeo"
+                                VerticalOptions="Center" />
+                        </StackLayout>
+
+                        <Frame
+                            Padding="0"
+                            BackgroundColor="#AAA"
+                            CornerRadius="5"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <StackLayout>
+                                <WebView
+                                    Grid.Row="1"
+                                    HeightRequest="300"
+                                    Source="{Binding EmpresaLocal.Video}"
+                                    VerticalOptions="Fill" />
+                            </StackLayout>
+
+                        </Frame>
+                        <!--  Vídeo  -->
+                    </StackLayout>
+
+
                     <!--  Contatos  -->
                     <StackLayout>
                         <Label
@@ -354,10 +388,7 @@
                             HeightRequest="2"
                             HorizontalOptions="FillAndExpand" />
 
-                        <Frame
-                            Margin="5"
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand">
+                        <Frame Margin="5">
                             <WebView HeightRequest="500" Source="{Binding Endereco}" />
                         </Frame>
                     </StackLayout>

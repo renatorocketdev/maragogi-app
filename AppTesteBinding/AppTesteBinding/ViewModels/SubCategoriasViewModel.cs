@@ -1,92 +1,125 @@
-﻿using AppTesteBinding.Models;
-using AppTesteBinding.Service.Modulo;
-using AppTesteBinding.Utils;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using Xamarin.Essentials;
-
-namespace AppTesteBinding.ViewModels
+﻿namespace AppTesteBinding.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using AppTesteBinding.Models;
+    using AppTesteBinding.Service.Modulo;
+    using AppTesteBinding.Utils;
+    using Xamarin.Essentials;
+
     internal class SubCategoriasViewModel : Manager<Empresa>
     {
-        #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SubCategoriasViewModel"/> class.
+        /// </summary>
         public SubCategoriasViewModel()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SubCategoriasViewModel"/> class.
+        /// </summary>
+        /// <param name="categoria"></param>
         public SubCategoriasViewModel(string categoria)
         {
-            HasNoEnterprises = false;
+            this.HasNoEnterprises = false;
 
             if (Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
-                AddImagesFromAPIAsync(categoria);
+                this.AddImagesFromAPIAsync(categoria);
 
-                AddFromAPIAsync(categoria);
+                this.AddFromAPIAsync(categoria);
 
                 if (Settings.Ingles)
                 {
-                    GetNameCategories(categoria);
+                    this.GetNameCategories(categoria);
                 }
                 else
                 {
-                    Categoria = categoria;
+                    this.Categoria = categoria;
                 }
             }
             else if (App.Database.HasEnterprises(categoria))
             {
-                Fotos = new ObservableCollection<FotosEstabelecimentos>
+                this.Fotos = new ObservableCollection<FotosEstabelecimentos>
                 {
-                    new FotosEstabelecimentos { Foto = "fundooffline.png" }
+                    new FotosEstabelecimentos { Foto = "fundooffline.png" },
                 };
 
-                AddFromDataBaseAsync(categoria);
+                this.AddFromDataBaseAsync(categoria);
 
-                Categoria = categoria;
+                this.Categoria = categoria;
             }
         }
 
-        #endregion Constructors
-
-        #region Methods
-
-        public async void AddFromAPIAsync(string Categoria)
+        /// <summary>
+        /// Set the rating for enterprises <see cref="SubCategoriasViewModel"/> class.
+        /// </summary>
+        private void SetRating()
         {
-            CategoriasIsBusy = true;
+            foreach (var item in this.ListLocal)
+            {
+                item.Media = (item.QtdVotos == 0 || item.Nota == 0) ? 0 : Convert.ToDouble(item.Nota / item.QtdVotos);
 
-            App.Database.DeleteCategories(Categoria);
-
-            var result = await new EmpresaService().GetEnterprises(Categoria);
-
-            ListLocal = new List<Empresa>(result.Where(x => x.SubCategoria == Categoria));
-
-            App.Database.SaveEnterprises(ListLocal);
-
-            CategoriasIsBusy = false;
+                if (item.Media == 0 && item.QtdVotos == 0)
+                {
+                    item.Rating = "none";
+                }
+                else if ((item.Media > 0 && item.Media < 5) && item.QtdVotos >= 1)
+                {
+                    item.Rating = "bad";
+                }
+                else if (item.Media >= 5)
+                {
+                    item.Rating = "good";
+                }
+            }
         }
 
-        public async void AddFromDataBaseAsync(string Categoria)
+        /// <summary>
+        /// Get entreprises with subcategory <see cref="SubCategoriasViewModel"/> class.
+        /// </summary>
+        /// <param name="categoria">Nome da categoria.</param>
+        public async void AddFromAPIAsync(string categoria)
         {
-            ListLocal = await App.Database.GetEnterpriseList(Categoria);
+            this.CategoriasIsBusy = true;
+
+            App.Database.DeleteCategories(categoria);
+
+            var result = await new EmpresaService().GetEnterprises(categoria);
+
+            this.HasNoEnterprises = result.Count == 0;
+
+            this.ListLocal = new List<Empresa>(result.OrderByDescending(x => x.Nota).ToList());
+
+            App.Database.SaveEnterprises(this.ListLocal);
+
+            this.SetRating();
+
+            this.CategoriasIsBusy = false;
+        }
+
+        public async void AddFromDataBaseAsync(string categoria)
+        {
+            this.ListLocal = await App.Database.GetEnterpriseList(categoria);
         }
 
         public async void GetNameCategories(string categoria)
         {
-            var Url = TranslateService.TranslateStringBuilder(categoria);
-            Categoria = await TranslateService.GetTranslatePtEn(Url);
+            var Url = this.TranslateService.TranslateStringBuilder(categoria);
+            this.Categoria = await this.TranslateService.GetTranslatePtEn(Url);
         }
 
         private async void AddImagesFromAPIAsync(string categoria)
         {
-            FotoIsBusy = true;
+            this.FotoIsBusy = true;
 
-            Fotos = await new CategoriaService().GetFundoSubCategoriaPath(categoria);
+            this.Fotos = await new CategoriaService().GetFundoSubCategoriaPath(categoria);
 
-            FotoIsBusy = false;
+            this.FotoIsBusy = false;
         }
-
-        #endregion Methods
     }
 }
