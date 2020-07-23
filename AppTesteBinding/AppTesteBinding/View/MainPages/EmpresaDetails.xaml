@@ -84,8 +84,7 @@
                             Style="{StaticResource IconeLateral}" />
 
                         <ImageButton
-                            x:Name="Comentar"
-                            Clicked="Comentar_Clicked"
+                            Command="{Binding CmdAvaliar}"
                             Source="controlecurtir"
                             Style="{StaticResource IconeLateral}" />
 
