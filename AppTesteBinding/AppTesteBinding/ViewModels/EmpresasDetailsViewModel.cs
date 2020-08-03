@@ -150,12 +150,17 @@ namespace AppTesteBinding.ViewModels
 
         #endregion CaracteristicasIsBusy
 
-        public ICommand CmdLigar { get; }
-        public ICommand CmdCompartilhar { get; }
-        public ICommand CmdTirarFoto { get; }
-        public ICommand CmdGaleria { get; }
+        public ICommand CmdLigar { get { return new Command(async () => await this.LigarNumero()); } }
 
-        public ICommand CmdAvaliar { get { return new Command(async (x) => await AvaliarEmpresa()); } }
+        public ICommand CmdCompartilhar { get { return new Command(async () => await this.TirarFoto()); } }
+
+        public ICommand CmdTirarFoto { get { return new Command<string>(async (x) => await this.Compartilhar()); } }
+
+        public ICommand CmdGaleria { get { return new Command<string>(async (x) => await this.AbrirGaleria()); } }
+
+        public ICommand CmdAvaliar { get { return new Command(async () => await this.AvaliarEmpresa()); } }
+
+        public ICommand CmdOpenWhats { get { return new Command(async () => await this.OpenWhats()); } }
 
         private async Task AvaliarEmpresa()
         {
@@ -186,11 +191,6 @@ namespace AppTesteBinding.ViewModels
         public EmpresasDetailsViewModel(Empresa empresa)
         {
             this.EmpresaLocal = empresa;
-
-            this.CmdLigar = new Command(async (x) => await this.LigarNumero());
-            this.CmdTirarFoto = new Command(async () => await this.TirarFoto());
-            this.CmdCompartilhar = new Command<string>(async (x) => await this.Compartilhar());
-            this.CmdGaleria = new Command<string>(async (x) => await this.AbrirGaleria());
 
             this.ImagemFundo(empresa.NomeEmpresa, empresa.SubCategoria);
 
@@ -291,6 +291,12 @@ namespace AppTesteBinding.ViewModels
         public void GetLocalAddress(string empresa)
         {
             this.Endereco = string.Format("https://www.google.com.br/maps/search/{0}", empresa.Replace(" ", "%20"));
+        }
+
+        public async Task OpenWhats()
+        {
+            var cleanNumber = "55" + this.EmpresaLocal.Telefone1Empresa.Replace("(", string.Empty).Replace(")", string.Empty).Replace("-", string.Empty).Replace(" ", string.Empty);
+            await Launcher.OpenAsync(new Uri($"https://wa.me/{cleanNumber}"));
         }
     }
 }

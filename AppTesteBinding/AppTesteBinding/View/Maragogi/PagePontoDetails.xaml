@@ -184,7 +184,7 @@
                         <Label
                             FontAttributes="Bold"
                             FontSize="20"
-                            Text="História da Cidade" />
+                            Text="História do Lugar" />
                         <BoxView
                             HeightRequest="1"
                             HorizontalOptions="FillAndExpand"

@@ -128,6 +128,26 @@
 
                 </StackLayout>
 
+                <Frame
+                    Grid.Row="0"
+                    Padding="0"
+                    BackgroundColor="#FFF"
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    Opacity="0.8"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                           Property=Height}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                          Property=Width}"
+                    VerticalOptions="End">
+
+                    <Label
+                        Margin="0"
+                        HorizontalOptions="Center"
+                        Style="{StaticResource LabelMenu}"
+                        Text="{Binding EmpresaLocal.NomeEmpresa}" />
+                </Frame>
+
                 <StackLayout Grid.Row="2">
                     <BoxView
                         BackgroundColor="MidnightBlue"
@@ -145,8 +165,12 @@
                             FontFamily="{StaticResource HammerFatFont}"
                             FontSize="Title"
                             HorizontalOptions="Center"
-                            Text="{Binding EmpresaLocal.NomeEmpresa}"
-                            TextColor="DarkSlateBlue" />
+                            Text="{Binding EmpresaLocal.Telefone1Empresa}"
+                            TextColor="DarkSlateBlue">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CmdOpenWhats}" NumberOfTapsRequired="1" />
+                            </Label.GestureRecognizers>
+                        </Label>
                     </Frame>
 
                     <!--  Inicio da Grid 3  -->

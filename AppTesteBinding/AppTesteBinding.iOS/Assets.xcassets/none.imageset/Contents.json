@@ -4,19 +4,19 @@
       "appearances": [],
       "scale": "1x",
       "idiom": "universal",
-      "filename": "menudormir.png"
+      "filename": "none.png"
     },
     {
       "appearances": [],
       "scale": "2x",
       "idiom": "universal",
-      "filename": "menudormir1.png"
+      "filename": "none1.png"
     },
     {
       "appearances": [],
       "scale": "3x",
       "idiom": "universal",
-      "filename": "menudormir2.png"
+      "filename": "none2.png"
     }
   ],
   "properties": {},

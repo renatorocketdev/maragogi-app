@@ -178,7 +178,7 @@
                         <Label
                             FontAttributes="Bold"
                             FontSize="20"
-                            Text="História da Cidade" />
+                            Text="História da Praia" />
                         <BoxView
                             HeightRequest="1"
                             HorizontalOptions="FillAndExpand"
