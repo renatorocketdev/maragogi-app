@@ -125,15 +125,30 @@
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
             </Style>
 
+            <Style x:Key="LabelTituloEmpresas" TargetType="Label">
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="FontFamily" Value="{StaticResource HammerFatFont}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="#000" />
+            </Style>
+
+            <Style x:Key="LabelSubTituloEmpresa" TargetType="Label">
+                <Setter Property="FontSize" Value="Subtitle"/>
+                <Setter Property="FontFamily" Value="{StaticResource HammerFatFont}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="#666" />
+            </Style>
+
+            <Style x:Key="LabelTituloCategorias" TargetType="Label">
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="FontFamily" Value="{StaticResource HammerFatFont}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="#000" />
+            </Style>
+
+
             <Style x:Key="LabelMenu" TargetType="Label">
-                <Setter Property="FontSize">
-                    <Setter.Value>
-                        <OnIdiom
-                            x:TypeArguments="x:Double"
-                            Phone="25"
-                            Tablet="28" />
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="FontSize" Value="Title"/>
                 <Setter Property="FontFamily" Value="{StaticResource HammerFatFont}" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="TextColor" Value="#000" />

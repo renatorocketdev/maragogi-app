@@ -95,7 +95,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Image Grid.Column="0" Source="{Binding Icone, Converter={StaticResource ByteArrayToImage}}" Style="{StaticResource ImageMenu}" Margin="5,0,0,0"/>
-                                <Label Grid.Column="1" Text="{Binding SubCategoria}" Style="{StaticResource LabelMenu}" Margin="10,0,0,0"/>
+                                <Label Grid.Column="1" Text="{Binding SubCategoria}" Style="{StaticResource LabelTituloCategorias}" Margin="10,0,0,0"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
