@@ -66,7 +66,7 @@ namespace AppTesteBinding.Service.Modulo
         {
             using (var httpClient = new DataService().HttpClient)
             {
-                var response = await httpClient.GetAsync(ApiBaseAddress + "APIFotoCategoria?SubCategoria=" + SubCategoria.Replace(" ", "")).ConfigureAwait(false);
+                var response = await httpClient.GetAsync(ApiBaseAddress + "APIFotoCategoria?SubCategoria=" + SubCategoria.Replace(" ", "%20"));
 
                 if (response.IsSuccessStatusCode)
                 {

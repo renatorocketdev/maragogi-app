@@ -296,7 +296,43 @@ namespace AppTesteBinding.ViewModels
         public async Task OpenWhats()
         {
             var cleanNumber = "55" + this.EmpresaLocal.Telefone1Empresa.Replace("(", string.Empty).Replace(")", string.Empty).Replace("-", string.Empty).Replace(" ", string.Empty);
-            await Launcher.OpenAsync(new Uri($"https://wa.me/{cleanNumber}"));
+
+            try
+            {
+                await Launcher.OpenAsync(new Uri($"https://wa.me/{cleanNumber}"));
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
+            }
+        }
+
+        public async Task OpenInsta()
+        {
+            var uri = $"instagram://user?username={this.EmpresaLocal.Instagram}";
+
+            try
+            {
+                await Launcher.OpenAsync(new Uri(uri));
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
+            }
+        }
+
+        public async Task OpenFacebook()
+        {
+            var uri = $"fb://page/page_id={this.EmpresaLocal.Facebook}";
+
+            try
+            {
+                await Launcher.OpenAsync(new Uri(uri));
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
+            }
         }
     }
 }
