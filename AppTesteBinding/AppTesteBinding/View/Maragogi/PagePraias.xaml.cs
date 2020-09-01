@@ -19,7 +19,7 @@ namespace AppTesteBinding.View.Maragogi
 
             Lista.SelectedItem = -0;
 
-            Navigation.PushAsync(new PagePraiasDetails(Item));
+            Navigation.PushAsync(new PagePraiaDetails(Item));
         }
 
         private void ImageButton_Clicked(object sender, EventArgs e)

@@ -27,7 +27,9 @@ namespace AppTesteBinding.Models
         public string MainCategoria { get; set; }
         public string SubCategoria { get; set; }
         public byte[] Icone { get; set; }
-
-
+        public string Video { get; set; }
+        public int QtdVotos { get; set; }
+        public string Rating { get; set; }
+        public double Media { get; set; }
     }
 }

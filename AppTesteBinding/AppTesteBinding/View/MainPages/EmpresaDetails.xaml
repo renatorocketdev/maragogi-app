@@ -21,7 +21,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
                 <!--  Activity para foto de fundo  -->
@@ -84,8 +84,7 @@
                             Style="{StaticResource IconeLateral}" />
 
                         <ImageButton
-                            x:Name="Comentar"
-                            Clicked="Comentar_Clicked"
+                            Command="{Binding CmdAvaliar}"
                             Source="controlecurtir"
                             Style="{StaticResource IconeLateral}" />
 
@@ -129,6 +128,26 @@
 
                 </StackLayout>
 
+                <Frame
+                    Grid.Row="0"
+                    Padding="0"
+                    BackgroundColor="#FFF"
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    Opacity="0.8"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                           Property=Height}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                          Property=Width}"
+                    VerticalOptions="End">
+
+                    <Label
+                        Margin="0"
+                        HorizontalOptions="Center"
+                        Style="{StaticResource LabelMenu}"
+                        Text="{Binding EmpresaLocal.NomeEmpresa}" />
+                </Frame>
+
                 <StackLayout Grid.Row="2">
                     <BoxView
                         BackgroundColor="MidnightBlue"
@@ -146,11 +165,49 @@
                             FontFamily="{StaticResource HammerFatFont}"
                             FontSize="Title"
                             HorizontalOptions="Center"
-                            Text="{Binding EmpresaLocal.NomeEmpresa}"
-                            TextColor="DarkSlateBlue" />
+                            Text="{Binding EmpresaLocal.Telefone1Empresa}"
+                            TextColor="DarkSlateBlue">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CmdOpenWhats}" NumberOfTapsRequired="1" />
+                            </Label.GestureRecognizers>
+                        </Label>
                     </Frame>
 
                     <!--  Inicio da Grid 3  -->
+                    <!--  Vídeo  -->
+                    <StackLayout Margin="5" IsVisible="{Binding HasVideo}">
+                        <StackLayout Orientation="Horizontal">
+                            <Label
+                                Margin="10"
+                                FontSize="18"
+                                Style="{StaticResource EntryIconAzul}"
+                                Text="{x:Static fontawesome:FontAwesomeIcons.Video}" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="20"
+                                Text="Vídeo"
+                                VerticalOptions="Center" />
+                        </StackLayout>
+
+                        <Frame
+                            Padding="0"
+                            BackgroundColor="#AAA"
+                            CornerRadius="5"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <StackLayout>
+                                <WebView
+                                    Grid.Row="1"
+                                    HeightRequest="300"
+                                    Source="{Binding EmpresaLocal.Video}"
+                                    VerticalOptions="Fill" />
+                            </StackLayout>
+
+                        </Frame>
+                        <!--  Vídeo  -->
+                    </StackLayout>
+
+
                     <!--  Contatos  -->
                     <StackLayout>
                         <Label
@@ -354,10 +411,7 @@
                             HeightRequest="2"
                             HorizontalOptions="FillAndExpand" />
 
-                        <Frame
-                            Margin="5"
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand">
+                        <Frame Margin="5">
                             <WebView HeightRequest="500" Source="{Binding Endereco}" />
                         </Frame>
                     </StackLayout>

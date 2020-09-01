@@ -38,7 +38,6 @@ namespace AppTesteBinding.Models
         #endregion Fields
 
         #region Properties
-
         public string Categoria
         {
             get { return _Categoria; }

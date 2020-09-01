@@ -132,7 +132,6 @@
 
                 <!--  COMER  -->
                 <ffimageloading:CachedImage
-                    x:Name="imgComer"
                     Grid.Row="0"
                     Grid.Column="0"
                     Source="menucomer">
@@ -152,11 +151,9 @@
 
                 <!--  DORMIR  -->
                 <ffimageloading:CachedImage
-                    x:Name="imgDormir"
                     Grid.Row="0"
                     Grid.Column="1"
-                    Source="menudormir"
-                    Style="{StaticResource imgPrimeiroMenu}">
+                    Source="menudormir">
                     <ffimageloading:CachedImage.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding CmdNavigation}"
@@ -171,33 +168,49 @@
                     Grid.Column="1"
                     Style="{StaticResource lblGridMenu}" />
 
-                <!--  LOCOMOVER  -->
+                <!--  MARAGOGI  -->
                 <ffimageloading:CachedImage
-                    x:Name="imgLocomover"
                     Grid.Row="0"
                     Grid.Column="2"
-                    Source="menulocomover"
-                    Style="{StaticResource imgPrimeiroMenu}">
+                    Source="menumaragogi">
                     <ffimageloading:CachedImage.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding CmdNavigation}"
-                            CommandParameter="Locomover"
+                            CommandParameter="Maragogi"
                             NumberOfTapsRequired="1" />
                     </ffimageloading:CachedImage.GestureRecognizers>
                 </ffimageloading:CachedImage>
+
                 <Label
-                    x:Name="Locomover"
                     Grid.Row="1"
                     Grid.Column="2"
+                    Style="{StaticResource lblGridMenu}"
+                    Text="MARAGOGI" />
+
+                <!--  PASSEIOS  -->
+                <ffimageloading:CachedImage
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Source="menupasseios">
+                    <ffimageloading:CachedImage.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding CmdNavigation}"
+                            CommandParameter="Passeios"
+                            NumberOfTapsRequired="1" />
+                    </ffimageloading:CachedImage.GestureRecognizers>
+                </ffimageloading:CachedImage>
+
+                <Label
+                    x:Name="Passeios"
+                    Grid.Row="3"
+                    Grid.Column="0"
                     Style="{StaticResource lblGridMenu}" />
 
                 <!--  DIVERSÃO  -->
                 <ffimageloading:CachedImage
-                    x:Name="imgDiversao"
                     Grid.Row="2"
-                    Grid.Column="0"
-                    Source="menudiversao"
-                    Style="{StaticResource imgPrimeiroMenu}">
+                    Grid.Column="1"
+                    Source="menudiversao">
                     <ffimageloading:CachedImage.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding CmdNavigation}"
@@ -205,19 +218,37 @@
                             NumberOfTapsRequired="1" />
                     </ffimageloading:CachedImage.GestureRecognizers>
                 </ffimageloading:CachedImage>
+
                 <Label
                     x:Name="Diversao"
                     Grid.Row="3"
-                    Grid.Column="0"
+                    Grid.Column="1"
+                    Style="{StaticResource lblGridMenu}" />
+
+                <!--  LOCOMOVER  -->
+                <ffimageloading:CachedImage
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Source="menulocomover">
+                    <ffimageloading:CachedImage.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding CmdNavigation}"
+                            CommandParameter="Locomover"
+                            NumberOfTapsRequired="1" />
+                    </ffimageloading:CachedImage.GestureRecognizers>
+                </ffimageloading:CachedImage>
+
+                <Label
+                    x:Name="Locomover"
+                    Grid.Row="3"
+                    Grid.Column="2"
                     Style="{StaticResource lblGridMenu}" />
 
                 <!--  COMPRAR  -->
                 <ffimageloading:CachedImage
-                    x:Name="imgComprar"
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Source="menucomprar"
-                    Style="{StaticResource imgPrimeiroMenu}">
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Source="menucomprar">
                     <ffimageloading:CachedImage.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding CmdNavigation}"
@@ -225,77 +256,18 @@
                             NumberOfTapsRequired="1" />
                     </ffimageloading:CachedImage.GestureRecognizers>
                 </ffimageloading:CachedImage>
+
                 <Label
                     x:Name="Comprar"
-                    Grid.Row="3"
-                    Grid.Column="1"
-                    Style="{StaticResource lblGridMenu}" />
-
-                <!--  BELEZA  -->
-                <ffimageloading:CachedImage
-                    x:Name="imgBeleza"
-                    Grid.Row="2"
-                    Grid.Column="2"
-                    Source="menubeleza"
-                    Style="{StaticResource imgPrimeiroMenu}">
-                    <ffimageloading:CachedImage.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding CmdNavigation}"
-                            CommandParameter="Beleza"
-                            NumberOfTapsRequired="1" />
-                    </ffimageloading:CachedImage.GestureRecognizers>
-                </ffimageloading:CachedImage>
-                <Label
-                    x:Name="Beleza"
-                    Grid.Row="3"
-                    Grid.Column="2"
-                    Style="{StaticResource lblGridMenu}" />
-
-                <!--  SAUDE  -->
-                <ffimageloading:CachedImage
-                    x:Name="imgSaude"
-                    Grid.Row="4"
-                    Grid.Column="0"
-                    Source="menusaude"
-                    Style="{StaticResource imgPrimeiroMenu}">
-                    <ffimageloading:CachedImage.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding CmdNavigation}"
-                            CommandParameter="Saúde"
-                            NumberOfTapsRequired="1" />
-                    </ffimageloading:CachedImage.GestureRecognizers>
-                </ffimageloading:CachedImage>
-                <Label
-                    x:Name="Saude"
                     Grid.Row="5"
                     Grid.Column="0"
-                    Style="{StaticResource lblGridMenu}" />
-
-                <!--  SERVICOS  -->
-                <ffimageloading:CachedImage
-                    x:Name="imgServicos"
-                    Grid.Row="4"
-                    Grid.Column="1"
-                    Source="menuservicos"
-                    Style="{StaticResource imgPrimeiroMenu}">
-                    <ffimageloading:CachedImage.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding CmdNavigation}"
-                            CommandParameter="Serviços"
-                            NumberOfTapsRequired="1" />
-                    </ffimageloading:CachedImage.GestureRecognizers>
-                </ffimageloading:CachedImage>
-                <Label
-                    x:Name="Servicos"
-                    Grid.Row="5"
-                    Grid.Column="1"
                     Style="{StaticResource lblGridMenu}" />
 
                 <!--  EVENTOS  -->
                 <ffimageloading:CachedImage
                     x:Name="imgEventos"
                     Grid.Row="4"
-                    Grid.Column="2"
+                    Grid.Column="1"
                     Source="menuevento"
                     Style="{StaticResource imgPrimeiroMenu}">
                     <ffimageloading:CachedImage.GestureRecognizers>
@@ -308,48 +280,68 @@
                 <Label
                     x:Name="Eventos"
                     Grid.Row="5"
+                    Grid.Column="1"
+                    Style="{StaticResource lblGridMenu}" />
+
+                <!--  BELEZA  -->
+                <ffimageloading:CachedImage
+                    x:Name="imgBeleza"
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    Source="menubeleza"
+                    Style="{StaticResource imgPrimeiroMenu}">
+                    <ffimageloading:CachedImage.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding CmdNavigation}"
+                            CommandParameter="Beleza"
+                            NumberOfTapsRequired="1" />
+                    </ffimageloading:CachedImage.GestureRecognizers>
+                </ffimageloading:CachedImage>
+                <Label
+                    x:Name="Beleza"
+                    Grid.Row="5"
                     Grid.Column="2"
                     Style="{StaticResource lblGridMenu}" />
 
-                <!--  PASSEIOS  -->
+                <!--  SAUDE  -->
                 <ffimageloading:CachedImage
-                    x:Name="imgPasseios"
+                    x:Name="imgSaude"
                     Grid.Row="6"
                     Grid.Column="0"
-                    Source="menupasseios"
+                    Source="menusaude"
                     Style="{StaticResource imgPrimeiroMenu}">
                     <ffimageloading:CachedImage.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding CmdNavigation}"
-                            CommandParameter="Passeios"
+                            CommandParameter="Saúde"
                             NumberOfTapsRequired="1" />
                     </ffimageloading:CachedImage.GestureRecognizers>
                 </ffimageloading:CachedImage>
                 <Label
-                    x:Name="Passeios"
+                    x:Name="Saude"
                     Grid.Row="7"
                     Grid.Column="0"
                     Style="{StaticResource lblGridMenu}" />
 
-                <!--  MARAGOGI  -->
+                <!--  SERVICOS  -->
                 <ffimageloading:CachedImage
-                    x:Name="imgMaragogi"
+                    x:Name="imgServicos"
                     Grid.Row="6"
                     Grid.Column="1"
-                    Source="menumaragogi"
+                    Source="menuservicos"
                     Style="{StaticResource imgPrimeiroMenu}">
                     <ffimageloading:CachedImage.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding CmdNavigation}"
-                            CommandParameter="Maragogi"
+                            CommandParameter="Serviços"
                             NumberOfTapsRequired="1" />
                     </ffimageloading:CachedImage.GestureRecognizers>
                 </ffimageloading:CachedImage>
                 <Label
+                    x:Name="Servicos"
                     Grid.Row="7"
                     Grid.Column="1"
-                    Style="{StaticResource lblGridMenu}"
-                    Text="MARAGOGI" />
+                    Style="{StaticResource lblGridMenu}" />
 
                 <!--  TRTECNOLOGIAS  -->
                 <ffimageloading:CachedImage
@@ -370,7 +362,6 @@
                     Grid.Column="2"
                     Style="{StaticResource lblGridMenu}"
                     Text="TRTECNOLOGIA" />
-
             </Grid>
         </Grid>
     </ContentPage.Content>

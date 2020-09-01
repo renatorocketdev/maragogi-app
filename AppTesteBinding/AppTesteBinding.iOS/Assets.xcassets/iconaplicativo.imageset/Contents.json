@@ -1,16 +1,19 @@
 {
   "images": [
     {
+      "appearances": [],
       "scale": "1x",
       "idiom": "universal",
       "filename": "iconaplicativo.png"
     },
     {
+      "appearances": [],
       "scale": "2x",
       "idiom": "universal",
       "filename": "iconaplicativo1.png"
     },
     {
+      "appearances": [],
       "scale": "3x",
       "idiom": "universal",
       "filename": "iconaplicativo2.png"

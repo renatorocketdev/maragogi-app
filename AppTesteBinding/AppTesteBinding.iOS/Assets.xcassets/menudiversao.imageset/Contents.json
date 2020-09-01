@@ -1,16 +1,19 @@
 {
   "images": [
     {
+      "appearances": [],
       "scale": "1x",
       "idiom": "universal",
       "filename": "menudiversao.png"
     },
     {
+      "appearances": [],
       "scale": "2x",
       "idiom": "universal",
       "filename": "menudiversao1.png"
     },
     {
+      "appearances": [],
       "scale": "3x",
       "idiom": "universal",
       "filename": "menudiversao2.png"

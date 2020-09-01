@@ -37,6 +37,10 @@
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <PackageReference Include="RestSharp" Version="106.11.4" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Xam.Plugin.ImageButton" Version="2.1.1" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.0.0.5" />
@@ -54,6 +58,12 @@
     </Compile>
     <Compile Update="View\MainPages\SubCategoriasPage.xaml.cs">
       <DependentUpon>SubCategoriasPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\Maragogi\PagePontoDetails.xaml.cs">
+      <DependentUpon>PagePontoDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\Maragogi\PagePraiaDetails.xaml.cs">
+      <DependentUpon>PagePraiaDetails.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -82,7 +92,7 @@
     <EmbeddedResource Update="View\Maragogi\PageCategoriasMaragogi.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\Maragogi\PageCategoriasMaragogiDetails.xaml">
+    <EmbeddedResource Update="View\Maragogi\PagePontoDetails.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\Maragogi\PageHistoriaMaragogiDetails.xaml">
@@ -91,7 +101,7 @@
     <EmbeddedResource Update="View\Maragogi\PagePraias.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\Maragogi\PagePraiasDetails.xaml">
+    <EmbeddedResource Update="View\Maragogi\PagePraiaDetails.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\Standard\Login.xaml">

@@ -1,16 +1,19 @@
 {
   "images": [
     {
+      "appearances": [],
       "scale": "1x",
       "idiom": "universal",
       "filename": "menuevento.png"
     },
     {
+      "appearances": [],
       "scale": "2x",
       "idiom": "universal",
       "filename": "menuevento1.png"
     },
     {
+      "appearances": [],
       "scale": "3x",
       "idiom": "universal",
       "filename": "menuevento2.png"

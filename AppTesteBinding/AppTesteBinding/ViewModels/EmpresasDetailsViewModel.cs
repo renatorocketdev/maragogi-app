@@ -5,7 +5,6 @@ using AppTesteBinding.View.Details;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -14,56 +13,58 @@ using Xamarin.Forms;
 
 namespace AppTesteBinding.ViewModels
 {
-    class EmpresasDetailsViewModel : INotifyPropertyChanged
+    internal class EmpresasDetailsViewModel : INotifyPropertyChanged
     {
-        #region PropertyChange
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        #endregion
 
-        Empresa _EmpresaLocal;
+        private Empresa _EmpresaLocal;
+
         public Empresa EmpresaLocal
         {
-            get { return _EmpresaLocal; } 
+            get { return _EmpresaLocal; }
             set { _EmpresaLocal = value; OnPropertyChanged(nameof(EmpresaLocal)); }
         }
 
-        string _Endereco;
+        private string _Endereco;
+
         public string Endereco
         {
-            get { return _Endereco; } 
+            get { return _Endereco; }
             set { _Endereco = value; OnPropertyChanged(nameof(Endereco)); }
         }
 
         #region ImagensIsBusy
 
-        ObservableCollection<FotosEstabelecimentos> _Fotos;
+        private ObservableCollection<FotosEstabelecimentos> _Fotos;
+
         public ObservableCollection<FotosEstabelecimentos> Fotos
         {
             get { return _Fotos; }
             set { _Fotos = value; OnPropertyChanged(nameof(Fotos)); }
         }
 
-        bool _FotoIsBusy;
+        private bool _FotoIsBusy;
+
         public bool FotoIsBusy
         {
             get { return _FotoIsBusy; }
             set { _FotoIsBusy = value; OnPropertyChanged(nameof(FotoIsBusy)); }
-
         }
 
-        #endregion
+        #endregion ImagensIsBusy
 
         #region ContatosIsBusy
 
-        bool _Telefone2Empresa;
-        bool _Facebook;
-        bool _Instagram;
-        bool _Site;
+        private bool _Telefone2Empresa;
+        private bool _Facebook;
+        private bool _Instagram;
+        private bool _Site;
+        private bool _HasVideo;
 
         public bool Telefone2Empresa
         {
@@ -88,37 +89,50 @@ namespace AppTesteBinding.ViewModels
             get { return _Site; }
             set { _Site = value; OnPropertyChanged(nameof(Site)); }
         }
+        
+        public bool HasVideo
+        {
+            get { return _HasVideo; }
+            set { _HasVideo = value; OnPropertyChanged(nameof(HasVideo)); }
+        }
 
-
-        #endregion
+        #endregion ContatosIsBusy
 
         #region ServiceIsBusy
-        bool _Serv2IsVisible;
-        bool _Serv3IsVisible;
-        bool _Serv4IsVisible;
+
+        private bool _Serv2IsVisible;
+        private bool _Serv3IsVisible;
+        private bool _Serv4IsVisible;
 
         public bool Serv2IsVisible
-        { 
-            get { return _Serv2IsVisible; } set { _Serv2IsVisible = value; OnPropertyChanged(nameof(Serv2IsVisible)); }
+        {
+            get { return _Serv2IsVisible; }
+            set { _Serv2IsVisible = value; OnPropertyChanged(nameof(Serv2IsVisible)); }
         }
+
         public bool Serv3IsVisible
         {
-            get { return _Serv3IsVisible; } set { _Serv3IsVisible = value; OnPropertyChanged(nameof(Serv3IsVisible)); }
+            get { return _Serv3IsVisible; }
+            set { _Serv3IsVisible = value; OnPropertyChanged(nameof(Serv3IsVisible)); }
         }
+
         public bool Serv4IsVisible
         {
-            get { return _Serv4IsVisible; } set { _Serv4IsVisible = value; OnPropertyChanged(nameof(Serv4IsVisible)); }
+            get { return _Serv4IsVisible; }
+            set { _Serv4IsVisible = value; OnPropertyChanged(nameof(Serv4IsVisible)); }
         }
-        #endregion
+
+        #endregion ServiceIsBusy
 
         #region CaracteristicasIsBusy
-        bool _Carac2IsVisible;
-        bool _Carac3IsVisible;
-        bool _Carac4IsVisible;
+
+        private bool _Carac2IsVisible;
+        private bool _Carac3IsVisible;
+        private bool _Carac4IsVisible;
 
         public bool Carac2IsVisible
         {
-            get { return _Carac2IsVisible; } 
+            get { return _Carac2IsVisible; }
             set { _Carac2IsVisible = value; OnPropertyChanged(nameof(Carac2IsVisible)); }
         }
 
@@ -133,39 +147,63 @@ namespace AppTesteBinding.ViewModels
             get { return _Carac4IsVisible; }
             set { _Carac4IsVisible = value; OnPropertyChanged(nameof(Carac4IsVisible)); }
         }
-        #endregion
 
-        public ICommand CmdLigar { get; }
-        public ICommand CmdCompartilhar { get; }
-        public ICommand CmdTirarFoto { get; }
-        public ICommand CmdGaleria { get; }
+        #endregion CaracteristicasIsBusy
+
+        public ICommand CmdLigar { get { return new Command(async () => await this.LigarNumero()); } }
+
+        public ICommand CmdCompartilhar { get { return new Command(async () => await this.TirarFoto()); } }
+
+        public ICommand CmdTirarFoto { get { return new Command<string>(async (x) => await this.Compartilhar()); } }
+
+        public ICommand CmdGaleria { get { return new Command<string>(async (x) => await this.AbrirGaleria()); } }
+
+        public ICommand CmdAvaliar { get { return new Command(async () => await this.AvaliarEmpresa()); } }
+
+        public ICommand CmdOpenWhats { get { return new Command(async () => await this.OpenWhats()); } }
+
+        private async Task AvaliarEmpresa()
+        {
+            var result = await Application.Current.MainPage
+                .DisplayPromptAsync("Deseja Curtir " + EmpresaLocal.NomeEmpresa + "?", "De uma nota de 0 a 10",
+                accept: "Curtir", maxLength: 2, keyboard: Keyboard.Numeric);
+
+            if (Convert.ToDouble(result) > 10)
+            {
+                await Application.Current.MainPage.DisplayAlert("Erro na avaliação", "Você digitou uma nota invalida. \nPor favor digite novamente uma nova valida!", "Ok");
+            }
+            else
+            {
+                var avaliacao = new AvaliacaoEmpresa
+                {
+                    id = EmpresaLocal.IdEmpresa,
+                    Nota = Convert.ToDouble(result)
+                };
+
+                await new AvaliacaoService().Save(avaliacao);
+            }
+        }
 
         public EmpresasDetailsViewModel()
         {
-            
         }
 
         public EmpresasDetailsViewModel(Empresa empresa)
         {
-            EmpresaLocal = empresa;
+            this.EmpresaLocal = empresa;
 
-            CmdLigar = new Command(async (x) => await LigarNumero());
-            CmdTirarFoto = new Command(async () => await TirarFoto());
-            CmdCompartilhar = new Command<string>(async (x) => await Compartilhar());
-            CmdGaleria = new Command<string>(async (x) => await AbrirGaleria());
+            this.ImagemFundo(empresa.NomeEmpresa, empresa.SubCategoria);
 
-            ImagemFundo(empresa.NomeEmpresa);
+            this.GetLocalAddress(empresa.NomeEmpresa);
 
-            GetLocalAddress(empresa.NomeEmpresa);
-
-            ValidateStacks();
+            this.ValidateStacks();
         }
 
         private async Task AbrirGaleria()
         {
             if (Settings.Logado || Settings.Facebook)
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new PageGaleriaComentarioFoto(EmpresaLocal.NomeEmpresa));
+                await Application.Current.MainPage.Navigation.PushAsync(new PageGaleriaComentarioFoto(this.EmpresaLocal.NomeEmpresa));
             }
             else
             {
@@ -177,7 +215,7 @@ namespace AppTesteBinding.ViewModels
         {
             if (Settings.Logado || Settings.Facebook)
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new PageComentarioFoto(EmpresaLocal.NomeEmpresa));
+                await Application.Current.MainPage.Navigation.PushAsync(new PageComentarioFoto(this.EmpresaLocal.NomeEmpresa));
             }
             else
             {
@@ -190,77 +228,111 @@ namespace AppTesteBinding.ViewModels
             await Share.RequestAsync(new ShareTextRequest
             {
                 Title = "App Maragogi",
-                Text = $"Olha, estou recomendando essa empresa para você, {EmpresaLocal.NomeEmpresa}. " +
-                $"\n É uma empresa no ramo {EmpresaLocal.MainCategoria}, especificamente de {EmpresaLocal.SubCategoria}." +
-                $"\n O seu principal serviço é {EmpresaLocal.Serv1}." +
-                $"\n Localizada em {EmpresaLocal.Endereco}." +
+                Text = $"Olha, estou recomendando essa empresa para você, {this.EmpresaLocal.NomeEmpresa}. " +
+                $"\n É uma empresa no ramo {this.EmpresaLocal.MainCategoria}, especificamente de {this.EmpresaLocal.SubCategoria}." +
+                $"\n O seu principal serviço é {this.EmpresaLocal.Serv1}." +
+                $"\n Localizada em {this.EmpresaLocal.Endereco}." +
                 $"\n Veja mais no nosso APP, venha fazer parte dessa família e descubra muitas empresas de Maragogi!" +
-                $"\n https://play.google.com/store/apps/details?id=com.TrTecnologias.Maragogi"
+                $"\n https://play.google.com/store/apps/details?id=com.TrTecnologias.Maragogi",
             }); ;
         }
 
         private async Task LigarNumero()
         {
-            await Launcher.OpenAsync(new Uri("tel:" + EmpresaLocal.Telefone1Empresa.Replace("(", "").Replace(")", "").Replace(" ", "").Replace("-", "")));
+            await Launcher.OpenAsync(new Uri("tel:" + this.EmpresaLocal.Telefone1Empresa.Replace("(", "").Replace(")", "").Replace(" ", "").Replace("-", "")));
         }
 
         private void ValidateStacks()
         {
-            Serv2IsVisible = IsNull(EmpresaLocal.Serv2);
-            Serv3IsVisible = IsNull(EmpresaLocal.Serv3);
-            Serv4IsVisible = IsNull(EmpresaLocal.Serv4);
+            this.Serv2IsVisible = !string.IsNullOrEmpty(this.EmpresaLocal.Serv2);
+            this.Serv3IsVisible = !string.IsNullOrEmpty(this.EmpresaLocal.Serv3);
+            this.Serv4IsVisible = !string.IsNullOrEmpty(this.EmpresaLocal.Serv4);
 
-            Carac2IsVisible = IsNull(EmpresaLocal.Carac2);
-            Carac3IsVisible = IsNull(EmpresaLocal.Carac3);
-            Carac4IsVisible = IsNull(EmpresaLocal.Carac4);
+            this.Carac2IsVisible = !string.IsNullOrEmpty(this.EmpresaLocal.Carac2);
+            this.Carac3IsVisible = !string.IsNullOrEmpty(this.EmpresaLocal.Carac3);
+            this.Carac4IsVisible = !string.IsNullOrEmpty(this.EmpresaLocal.Carac4);
 
-            Telefone2Empresa = IsNull(EmpresaLocal.Telefone2Empresa);
-            Facebook = IsNull(EmpresaLocal.Facebook);
-            Instagram = IsNull(EmpresaLocal.Instagram);
-            Site = IsNull(EmpresaLocal.Site);
+            this.Telefone2Empresa = !string.IsNullOrEmpty(this.EmpresaLocal.Telefone2Empresa);
+            this.Facebook = !string.IsNullOrEmpty(this.EmpresaLocal.Facebook);
+            this.Instagram = !string.IsNullOrEmpty(this.EmpresaLocal.Instagram);
+            this.Site = !string.IsNullOrEmpty(this.EmpresaLocal.Site);
+
+            this.HasVideo = !string.IsNullOrEmpty(this.EmpresaLocal.Video);
         }
 
-        public async void ImagemFundo(string NomeEmpresa)
+        public async void ImagemFundo(string nomeEmpresa, string subCategoria)
         {
-            EmpresaService EmpresaService = new EmpresaService();
 
-            FotoIsBusy = true;
+            this.FotoIsBusy = true;
 
             if (Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
-                var result = await EmpresaService.GetFundoEmpresaPath(NomeEmpresa);
+                var result = await new EmpresaService().GetFundoEmpresaPath(nomeEmpresa, subCategoria);
 
                 if (result != null)
                 {
-                    Fotos = new ObservableCollection<FotosEstabelecimentos>(result);
+                    this.Fotos = new ObservableCollection<FotosEstabelecimentos>(result);
                 }
                 else
                 {
-                    Fotos = new ObservableCollection<FotosEstabelecimentos>();
+                    this.Fotos = new ObservableCollection<FotosEstabelecimentos>();
                 }
             }
             else
             {
-                Fotos = new ObservableCollection<FotosEstabelecimentos>
+                this.Fotos = new ObservableCollection<FotosEstabelecimentos>
                 {
-                    new FotosEstabelecimentos { Foto = "fundooffline.png" }
+                    new FotosEstabelecimentos { Foto = "fundooffline.png" },
                 };
             }
 
-            FotoIsBusy = false;
+            this.FotoIsBusy = false;
+        }
+        public void GetLocalAddress(string empresa)
+        {
+            this.Endereco = string.Format("https://www.google.com.br/maps/search/{0}", empresa.Replace(" ", "%20"));
         }
 
-        public bool IsNull(string propriedade)
+        public async Task OpenWhats()
         {
-            if (string.IsNullOrEmpty(propriedade))
-                return false;
+            var cleanNumber = "55" + this.EmpresaLocal.Telefone1Empresa.Replace("(", string.Empty).Replace(")", string.Empty).Replace("-", string.Empty).Replace(" ", string.Empty);
 
-            return true;
+            try
+            {
+                await Launcher.OpenAsync(new Uri($"https://wa.me/{cleanNumber}"));
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
+            }
         }
 
-        public void GetLocalAddress(string Empresa)
+        public async Task OpenInsta()
         {
-            Endereco = string.Format("https://www.google.com.br/maps/search/{0}", Empresa.Replace(" ", "%20"));
+            var uri = $"instagram://user?username={this.EmpresaLocal.Instagram}";
+
+            try
+            {
+                await Launcher.OpenAsync(new Uri(uri));
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
+            }
+        }
+
+        public async Task OpenFacebook()
+        {
+            var uri = $"fb://page/page_id={this.EmpresaLocal.Facebook}";
+
+            try
+            {
+                await Launcher.OpenAsync(new Uri(uri));
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
+            }
         }
     }
 }

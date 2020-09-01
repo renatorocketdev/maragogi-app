@@ -1,42 +1,59 @@
 ﻿using AppTesteBinding.Models;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AppTesteBinding.ViewModels
 {
-    class MaragogiViewModel : INotifyPropertyChanged
+    internal class MaragogiViewModel
     {
-        #region PropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
+        #region Fields
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
+        public List<CategoriaMaragogi> ListLocal { get; set; }
 
-        List<Categoria> _categoriasLocal;
-        public List<Categoria> CategoriasLocal
-        {
-            get { return _categoriasLocal; }
-            set { _categoriasLocal = value; OnPropertyChanged(nameof(CategoriasLocal)); }
-        }
+        #endregion Fields
 
-        public ICommand CmdPopAsync { get; }
+        #region Constructors
 
         public MaragogiViewModel()
         {
-            CmdPopAsync = new Command(async (x) => await PopAsync());
+            ListLocal = new List<CategoriaMaragogi>()
+            {
+                new CategoriaMaragogi
+                {
+                    Foto = "menumaragogi",
+                    Nome = "História"
+                },
+                new CategoriaMaragogi
+                {
+                    Foto = "menumaragogi",
+                    Nome = "Pontos Turísticos"
+                },
+                new CategoriaMaragogi
+                {
+                    Foto = "menumaragogi",
+                    Nome = "Praias"
+                }
+            };
         }
+
+        #endregion Constructors
+
+        #region Properties
+
+        public ICommand CmdPopAsync { get { return new Command(async () => await PopAsync()); } }
+
+        #endregion Properties
+
+        #region Methods
 
         private async Task PopAsync()
         {
             await Application.Current.MainPage.Navigation.PopAsync();
         }
+
+        #endregion Methods
+
     }
 }
