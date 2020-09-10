@@ -1,4 +1,5 @@
 ﻿using AppTesteBinding.Models;
+using AppTesteBinding.Service;
 using AppTesteBinding.Service.Modulo;
 using System;
 using System.Collections.Generic;
@@ -50,7 +51,7 @@ namespace AppTesteBinding.ViewModels
         {
             FotoIsBusy = true;
 
-            var result = await new CategoriaService().GetFundoCategoriaPath(categoria);
+            var result = await new MyServiceImage().GetImages("APIFotoCategoria", "FundoCategoria", categoria);
 
             Fotos = new ObservableCollection<FotosEstabelecimentos>(result);
 
@@ -70,7 +71,7 @@ namespace AppTesteBinding.ViewModels
 
             List<CategoriaEnglish> cat = new List<CategoriaEnglish>();
 
-            var res = await new CategoriaService().GetCategoriasMainCategorias(Categoria);
+            var res = await new Service<Categoria>().Get("APICategorias", "MainCategoria", Categoria);
             var traslate = await TraslateList(res);
 
             for (int i = 0; i < res.Count; i++)

@@ -31,7 +31,7 @@ namespace AppTesteBinding.ViewModels
 
         public FotoComentarioViewModel()
         {
-            
+
         }
 
         public FotoComentarioViewModel(string Nome)
@@ -104,13 +104,13 @@ namespace AppTesteBinding.ViewModels
                 {
                     Comentario = Comment,
                     DataComentario = DateTime.Now.ToString(),
-                    Empresa = Nome.Replace(" ", ""),
+                    Empresa = Nome,
                     Foto = vs,
                     Usuario = Settings.Usuario,
                     Email = Settings.Email
                 };
 
-                await new FotoComentarioService().Save(comentario);
+                await new Service<FotoComentario>().Post(comentario, "APIFotoComentario");
             }
             else
             {
@@ -134,7 +134,9 @@ namespace AppTesteBinding.ViewModels
                     MediaFile = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                     {
                         Directory = Settings.Usuario,
-                        Name = $"{Settings.Usuario}.jpg"
+                        Name = $"{Settings.Usuario}.jpg",
+                        CompressionQuality = 75,
+                        CustomPhotoSize = 50,
                     });
 
                     if (MediaFile != null)
@@ -157,7 +159,7 @@ namespace AppTesteBinding.ViewModels
                 await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
             }
 
-            
+
         }
 
         #endregion Methods

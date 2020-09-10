@@ -1,4 +1,5 @@
 ﻿using AppTesteBinding.Models;
+using AppTesteBinding.Service;
 using AppTesteBinding.Service.Modulo;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -45,7 +46,7 @@ namespace AppTesteBinding.ViewModels
 
             App.Database.DeletePraias();
 
-            ListLocal = await new PraiasService().GetPraias();
+            ListLocal = await new Service<Praias>().Get("APIPraias");
 
             App.Database.SavePraias(ListLocal);
 
@@ -61,7 +62,7 @@ namespace AppTesteBinding.ViewModels
         {
             FotoIsBusy = true;
 
-            Fotos = await new PraiasService().GetFundo();
+            Fotos = await new MyServiceImage().GetImages("APIFotoPraias");
 
             FotoIsBusy = false;
         }

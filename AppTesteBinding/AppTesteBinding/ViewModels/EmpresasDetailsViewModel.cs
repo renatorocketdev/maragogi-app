@@ -152,9 +152,9 @@ namespace AppTesteBinding.ViewModels
 
         public ICommand CmdLigar { get { return new Command(async () => await this.LigarNumero()); } }
 
-        public ICommand CmdCompartilhar { get { return new Command(async () => await this.TirarFoto()); } }
+        public ICommand CmdCompartilhar { get { return new Command(async () => await this.Compartilhar()); } }
 
-        public ICommand CmdTirarFoto { get { return new Command<string>(async (x) => await this.Compartilhar()); } }
+        public ICommand CmdTirarFoto { get { return new Command<string>(async (x) => await this.TirarFoto());  } }
 
         public ICommand CmdGaleria { get { return new Command<string>(async (x) => await this.AbrirGaleria()); } }
 
@@ -180,7 +180,7 @@ namespace AppTesteBinding.ViewModels
                     Nota = Convert.ToDouble(result)
                 };
 
-                await new AvaliacaoService().Save(avaliacao);
+                await new Service<AvaliacaoEmpresa>().Post(avaliacao, "APIAvaliacao");
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using AppTesteBinding.Models;
+using AppTesteBinding.Service;
 using AppTesteBinding.Service.Modulo;
 using AppTesteBinding.Utils;
 using AppTesteBinding.View.Details;
@@ -78,7 +79,7 @@ namespace AppTesteBinding.ViewModels
         {
             FotoIsBusy = true;
 
-            var result = await new PraiasService().GetFotoFundo(Praia);
+            var result = await new MyServiceImage().GetImages("APIFotoPraias", "Praia", Praia);
 
             if (result != null)
             {

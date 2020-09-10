@@ -1,6 +1,6 @@
 ﻿using AppTesteBinding.Models;
+using AppTesteBinding.Service;
 using AppTesteBinding.Service.Modulo;
-using AppTesteBinding.Utils;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,26 +13,26 @@ namespace AppTesteBinding.ViewModels
     {
         public MainCategoriasViewModel()
         {
-
         }
 
-        public MainCategoriasViewModel(string Categoria)
+        public MainCategoriasViewModel(string categoria)
         {
-            this.Categoria = Categoria;
+            this.Categoria = categoria;
 
             if (Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
-                AddImagesFromAPIAsync(Categoria);
-                AddFromAPIAsync(Categoria);
+                _ = AddImagesFromAPIAsync(categoria);
+
+                _ = AddFromAPIAsync(categoria);
             }
-            else if(App.Database.HasCategories(Categoria))
+            else if (App.Database.HasCategories(categoria))
             {
                 Fotos = new ObservableCollection<FotosEstabelecimentos>
                 {
                     new FotosEstabelecimentos { Foto = "fundooffline.png" }
                 };
 
-                AddFromDataBaseAsync(Categoria);
+                _ = AddFromDataBaseAsync(categoria);
             }
             else
             {
@@ -43,64 +43,20 @@ namespace AppTesteBinding.ViewModels
 
                 ListLocal = new List<Categoria>();
             }
-                
-
-            //FotoIsBusy = CategoriasIsBusy = true;
-
-            //if (Connectivity.NetworkAccess == NetworkAccess.Internet)
-            //{
-            //    if (!Settings.Ingles)
-            //    {
-            //        this.Categoria = Categoria;
-
-            //        GetAsync(Categoria);
-
-            //        English = false;
-            //        CategoriasIsBusy = false;
-            //        Portuguese = true;
-            //    }
-            //    else
-            //    {
-            //        GetEngAsync(Categoria);
-
-            //        TraslateTextCategoria(Categoria);
-
-            //        CategoriasIsBusy = false;
-            //        Portuguese = false;
-            //        English = true;
-            //    }
-            //}
-            //else
-            //{
-            //    Fotos = new ObservableCollection<FotosEstabelecimentos>
-            //    {
-            //        new FotosEstabelecimentos { Foto = "fundooffline.png" }
-            //    };
-
-            //    FotoIsBusy = false;
-
-            //    this.Categoria = Categoria;
-
-            //    GetNoConnection(Categoria);
-
-            //    CategoriasIsBusy = false;
-            //    Portuguese = true;
-            //    English = false;
-            //}
         }
 
-        private async void AddImagesFromAPIAsync(string categoria)
+        private async Task AddImagesFromAPIAsync(string categoria)
         {
             FotoIsBusy = true;
 
-            var result = await new CategoriaService().GetFundoCategoriaPath(categoria);
+            var result = await new MyServiceImage().GetImages("APIFotoCategoria", "FundoCategoria", categoria);
 
             Fotos = new ObservableCollection<FotosEstabelecimentos>(result);
 
             FotoIsBusy = false;
         }
 
-        public async void AddFromAPIAsync(string Categoria)
+        public async Task AddFromAPIAsync(string Categoria)
         {
             CategoriasIsBusy = true;
 
@@ -108,7 +64,7 @@ namespace AppTesteBinding.ViewModels
 
             List<Categoria> cat;
 
-            var res = await new CategoriaService().GetCategorias();
+            var res = await new Service<Categoria>().Get("APICategorias");
 
             cat = new List<Categoria>(res);
 
@@ -121,54 +77,10 @@ namespace AppTesteBinding.ViewModels
             CategoriasIsBusy = false;
         }
 
-        public async void AddFromDataBaseAsync(string Categoria)
+        public async Task AddFromDataBaseAsync(string Categoria)
         {
             var result = await App.Database.GetCategoriesList(Categoria);
             ListLocal = new List<Categoria>(result);
         }
-
-        //public async void GetAsync(string Categoria)
-        //{
-        //    App.Database.DeleteCategories(Categoria);
-
-        //    Persist.Categorias = await new CategoriaService().GetCategorias();
-
-        //    var result = Persist.Categorias.Where(x => x.MainCategoria == Categoria);
-
-        //    ListLocal = new List<Categoria>(result);
-
-        //    App.Database.SaveCategories(ListLocal);
-        //}
-
-        //public async void GetNoConnection(string Categoria)
-        //{
-        //    var result = await App.Database.GetCategoriesList(Categoria);
-        //    ListLocal = new List<Categoria>(result);
-        //}
-
-        //public async void GetEngAsync(string Categoria)
-        //{
-        //    English = true;
-        //    Portuguese = false;
-
-        //    ListLocal = new List<Categoria>(await TraslateList(await App.Database.GetCategoriesList(Categoria)));
-
-        //    CategoriasIsBusy = false;
-        //}
-
-        //public async Task<IEnumerable<Categoria>> TraslateList(List<Categoria> list)
-        //{
-        //    var Url = TranslateService.TranslateStringBuilder(list);
-        //    var Translate = await TranslateService.GetTranslatePtEnList(Url);
-
-        //    return TranslateService.Replace(list, Translate);
-        //}
-
-        //public async void TraslateTextCategoria(string Categoria)
-        //{
-        //    var Url = TranslateService.TranslateStringBuilder(Categoria);
-
-        //    this.Categoria = await TranslateService.GetTranslatePtEn(Url);
-        //}
     }
 }

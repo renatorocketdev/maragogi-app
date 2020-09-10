@@ -40,7 +40,7 @@ namespace AppTesteBinding.ViewModels
 
             App.Database.DeleteCategoriasMaragogi();
 
-            ListLocal = await new CategoriasMaragogiService().GetCategoriasMaragogi();
+            ListLocal = await new Service<CategoriaMaragogi>().Get("APICategoriasMaragogi");
 
             App.Database.SaveCategoriasMaragogi(ListLocal);
 

@@ -4,14 +4,15 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Threading.Tasks;
     using AppTesteBinding.Models;
+    using AppTesteBinding.Service;
     using AppTesteBinding.Service.Modulo;
     using AppTesteBinding.Utils;
     using Xamarin.Essentials;
 
     internal class SubCategoriasViewModel : Manager<Empresa>
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SubCategoriasViewModel"/> class.
         /// </summary>
@@ -29,29 +30,29 @@
 
             if (Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
-                this.AddImagesFromAPIAsync(categoria);
+                _ = AddImagesFromAPIAsync(categoria);
 
-                this.AddFromAPIAsync(categoria);
+                _ = AddFromAPIAsync(categoria);
 
                 if (Settings.Ingles)
                 {
-                    this.GetNameCategories(categoria);
+                    _ = GetNameCategories(categoria);
                 }
                 else
                 {
-                    this.Categoria = categoria;
+                    Categoria = categoria;
                 }
             }
             else if (App.Database.HasEnterprises(categoria))
             {
-                this.Fotos = new ObservableCollection<FotosEstabelecimentos>
+                Fotos = new ObservableCollection<FotosEstabelecimentos>
                 {
                     new FotosEstabelecimentos { Foto = "fundooffline.png" },
                 };
 
-                this.AddFromDataBaseAsync(categoria);
+                _ = AddFromDataBaseAsync(categoria);
 
-                this.Categoria = categoria;
+                Categoria = categoria;
             }
         }
 
@@ -83,13 +84,13 @@
         /// Get entreprises with subcategory <see cref="SubCategoriasViewModel"/> class.
         /// </summary>
         /// <param name="categoria">Nome da categoria.</param>
-        public async void AddFromAPIAsync(string categoria)
+        public async Task AddFromAPIAsync(string categoria)
         {
             this.CategoriasIsBusy = true;
 
             App.Database.DeleteCategories(categoria);
 
-            var result = await new EmpresaService().GetEnterprises(categoria);
+            var result = await new Service<Empresa>().Get("APIEmpresa", "SubCategoria", categoria);
 
             this.HasNoEnterprises = result.Count == 0;
 
@@ -102,24 +103,24 @@
             this.CategoriasIsBusy = false;
         }
 
-        public async void AddFromDataBaseAsync(string categoria)
+        public async Task AddFromDataBaseAsync(string categoria)
         {
-            this.ListLocal = await App.Database.GetEnterpriseList(categoria);
+            ListLocal = await App.Database.GetEnterpriseList(categoria);
         }
 
-        public async void GetNameCategories(string categoria)
+        public async Task GetNameCategories(string categoria)
         {
-            var Url = this.TranslateService.TranslateStringBuilder(categoria);
-            this.Categoria = await this.TranslateService.GetTranslatePtEn(Url);
+            var Url = TranslateService.TranslateStringBuilder(categoria);
+            Categoria = await TranslateService.GetTranslatePtEn(Url);
         }
 
-        private async void AddImagesFromAPIAsync(string categoria)
+        private async Task AddImagesFromAPIAsync(string categoria)
         {
-            this.FotoIsBusy = true;
+            FotoIsBusy = true;
 
-            this.Fotos = await new CategoriaService().GetFundoSubCategoriaPath(categoria);
+            Fotos = await new MyServiceImage().GetImages("APIFotoCategoria", "SubCategoria", categoria);
 
-            this.FotoIsBusy = false;
+            FotoIsBusy = false;
         }
     }
 }

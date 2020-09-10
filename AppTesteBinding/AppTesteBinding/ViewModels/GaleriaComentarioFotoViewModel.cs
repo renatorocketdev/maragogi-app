@@ -1,6 +1,7 @@
 ﻿using AppTesteBinding.Models;
 using AppTesteBinding.Service.Modulo;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace AppTesteBinding.ViewModels
     {
         #region Fields
 
-        private List<FotoComentario> _FotoComentario;
+        private ObservableCollection<FotoComentario> _FotoComentario;
 
         private bool _ListIsBusy;
         private bool _ListIsVisible;
@@ -20,7 +21,7 @@ namespace AppTesteBinding.ViewModels
 
         #region Properties
 
-        public List<FotoComentario> FotoComentario
+        public ObservableCollection<FotoComentario> FotoComentario
         {
             get { return _FotoComentario; }
             set { _FotoComentario = value; OnPropertyChanged(nameof(FotoComentario)); }
@@ -31,6 +32,7 @@ namespace AppTesteBinding.ViewModels
             get { return _ListIsBusy; }
             set { _ListIsBusy = value; OnPropertyChanged(nameof(ListIsBusy)); }
         }
+
         public bool ListIsVisible
         {
             get { return _ListIsVisible; }
@@ -43,15 +45,12 @@ namespace AppTesteBinding.ViewModels
 
         public GaleriaComentarioFotoViewModel()
         {
+            ListIsVisible = false;
         }
 
         public GaleriaComentarioFotoViewModel(string NomeEmpresa)
         {
-            ListIsBusy = true;
-
-            GetImagesAsync(NomeEmpresa).Wait();
-
-            ListIsBusy = false;
+            _ = GetImagesAsync(NomeEmpresa);
         }
 
         #endregion Constructors
@@ -60,11 +59,13 @@ namespace AppTesteBinding.ViewModels
 
         public async Task GetImagesAsync(string NomeEmpresa)
         {
-            ListIsVisible = false;
+            ListIsBusy = true;
 
-            FotoComentario = await new FotoComentarioService().Get(NomeEmpresa);
+            FotoComentario = await new Service<FotoComentario>().ObservableGet("APIFotoComentario", "NomeEmpresa", NomeEmpresa);
 
-            if (FotoComentario != null)
+            ListIsBusy = false;
+
+            if (FotoComentario.Count != 0)
             {
                 ListIsVisible = false;
             }

@@ -22,7 +22,6 @@ namespace AppTesteBinding.Models
 
         #region Fields
 
-        public DataService DataService = new DataService();
         public List<FotosEstabelecimentos> _FotoCategoria;
         public List<T> _ListLocal;
         public ObservableCollection<FotosEstabelecimentos> _Fotos;

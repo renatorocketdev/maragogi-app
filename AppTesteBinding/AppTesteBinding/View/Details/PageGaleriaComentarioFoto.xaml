@@ -22,7 +22,7 @@
 
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
+            <StackLayout BackgroundColor="#DDD">
                 <Grid BackgroundColor="#309C99">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="50" />
@@ -44,7 +44,7 @@
                         Grid.Column="1"
                         FontAttributes="Bold"
                         FontFamily="Roboto Condensed"
-                        FontSize="Large"
+                        FontSize="Medium"
                         HorizontalTextAlignment="Center"
                         Text="FOTOS DOS NOSSOS USUÁRIOS"
                         TextColor="#FFF"
@@ -57,17 +57,22 @@
                 </Grid>
 
                 <Grid BackgroundColor="#DDD">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+                    
+                    <StackLayout>
+                        <Image
+                            Margin="0,40,0,0"
+                            Source="logo.png" />
 
-                    <Button
-                        x:Name="NenhumaEmpresa"
-                        Margin="0,50,0,0"
-                        IsVisible="{Binding ListIsVisible}"
-                        Style="{StaticResource ButtonStyleTransparenteVerde}"
-                        Text="POSTE A PRIMEIRA FOTO"
-                        VerticalOptions="CenterAndExpand" />
+                        <Button
+                            x:Name="NenhumaEmpresa"
+                            Margin="0,50,0,0"
+                            IsVisible="{Binding ListIsVisible}"
+                            Style="{StaticResource ButtonStyleTransparenteVerde}"
+                            Text="POSTE A PRIMEIRA FOTO"
+                            VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+
+                    
 
                     <ActivityIndicator
                         IsRunning="{Binding ListIsBusy}"
@@ -77,7 +82,6 @@
                     <ListView
                         CachingStrategy="RecycleElementAndDataTemplate"
                         HasUnevenRows="True"
-                        IsVisible="{Binding ListIsVisible}"
                         ItemsSource="{Binding FotoComentario}"
                         SeparatorVisibility="None"
                         VerticalOptions="FillAndExpand">

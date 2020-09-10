@@ -1,4 +1,5 @@
 ﻿using AppTesteBinding.Models;
+using AppTesteBinding.Service;
 using AppTesteBinding.Service.Modulo;
 using AppTesteBinding.Utils;
 using AppTesteBinding.View.Details;
@@ -77,7 +78,7 @@ namespace AppTesteBinding.ViewModels
         {
             FotoIsBusy = true;
 
-            var result = await new CategoriasMaragogiService().GetFotoFundo(categoriaMaragogi);
+            var result = await new MyServiceImage().GetImages("APIFotoCategoriasMaragogi", "CategoriasMaragogi", categoriaMaragogi);
 
             if (result != null)
             {
