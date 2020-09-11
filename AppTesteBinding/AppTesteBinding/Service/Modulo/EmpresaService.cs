@@ -1,6 +1,7 @@
 ﻿using AppTesteBinding.Models;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace AppTesteBinding.Service.Modulo
@@ -9,9 +10,9 @@ namespace AppTesteBinding.Service.Modulo
     {
         public async Task<ObservableCollection<FotosEstabelecimentos>> GetFundoEmpresaPath(string nomeEmpresa, string subCategoria)
         {
-            using (var httpClient = new DataService().HttpClient)
+            using (var httpClient = new HttpClient())
             {
-                var response = await httpClient.GetAsync(this.ApiBaseAddress + $"APIFotoEmpresa?NomeEmpresa={nomeEmpresa}&SubCategoria={subCategoria}").ConfigureAwait(false);
+                var response = await httpClient.GetAsync(ApiBaseAddress + $"/APIFotoEmpresa?NomeEmpresa={nomeEmpresa}&SubCategoria={subCategoria}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -23,7 +24,7 @@ namespace AppTesteBinding.Service.Modulo
                     }
                 }
 
-                return null;
+                return new ObservableCollection<FotosEstabelecimentos>();
             }
         }
     }

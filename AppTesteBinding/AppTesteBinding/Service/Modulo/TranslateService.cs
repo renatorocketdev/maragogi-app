@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,7 +33,7 @@ namespace AppTesteBinding.Service.Modulo
 
         public async Task<List<string>> GetTranslatePtEnList(string Url)
         {
-            using (var httpClient = new DataService().HttpClient)
+            using (var httpClient = new HttpClient())
             {
                 var response = await httpClient.GetAsync(Url + $"&lang=pt-en");
 
@@ -50,7 +51,7 @@ namespace AppTesteBinding.Service.Modulo
 
         public async Task<string> GetTranslatePtEn(string Url)
         {
-            using (var httpClient = new DataService().HttpClient)
+            using (var httpClient = new HttpClient())
             {
                 var response = await httpClient.GetAsync(Url + $"&lang=pt-en");
 
@@ -68,7 +69,7 @@ namespace AppTesteBinding.Service.Modulo
 
         public async Task<string> GetTranslateEnPt(string Url)
         {
-            using (var httpClient = new DataService().HttpClient)
+            using (var httpClient = new HttpClient())
             {
                 var response = await httpClient.GetAsync(Url + $"&lang=en-pt");
 

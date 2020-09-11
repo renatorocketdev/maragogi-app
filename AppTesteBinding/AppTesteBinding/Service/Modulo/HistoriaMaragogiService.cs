@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace AppTesteBinding.Service.Modulo
@@ -11,9 +12,9 @@ namespace AppTesteBinding.Service.Modulo
     {
         public async Task<HistoriaMaragogi> GetHistoriaMaragogi()
         {
-            using (var httpClient = new DataService().HttpClient)
+            using (var httpClient = new HttpClient())
             {
-                var response = await httpClient.GetAsync(ApiBaseAddress + "APIHistoriaMaragogi");
+                var response = await httpClient.GetAsync(ApiBaseAddress + "/APIHistoriaMaragogi");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -29,7 +30,7 @@ namespace AppTesteBinding.Service.Modulo
 
         public async Task<ObservableCollection<FotosEstabelecimentos>> GetFotoFundo()
         {
-            using (var httpClient = new DataService().HttpClient)
+            using (var httpClient = new HttpClient())
             {
                 var response = await httpClient.GetAsync(ApiBaseAddress + "APIFotoHistoriaMaragogi");
 

@@ -137,6 +137,7 @@
                                 <Image
                                     Grid.Column="0"
                                     Margin="10"
+                                    BackgroundColor="Transparent"
                                     Source="{Binding Icone, Converter={StaticResource ByteArrayToImage}}"
                                     Style="{StaticResource ImageMenu}" />
                                 <Label

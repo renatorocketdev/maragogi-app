@@ -144,39 +144,43 @@
                 </Frame>
                 <!--  Nome  -->
 
-                <StackLayout Grid.Row="2" Margin="5">
-                    <BoxView
-                        BackgroundColor="MidnightBlue"
+                <BoxView Grid.Row="1"
+                        BackgroundColor="#309C99"
                         HeightRequest="10"
                         HorizontalOptions="FillAndExpand" />
 
+                <StackLayout Grid.Row="2" Margin="5">
                     <!--  Vídeo  -->
-                    <StackLayout Orientation="Horizontal">
-                        <Label
-                            Margin="10"
-                            FontSize="18"
-                            Style="{StaticResource EntryIconVerde}"
-                            Text="{x:Static fontawesome:FontAwesomeIcons.Video}" />
-                        <Label
-                            FontAttributes="Bold"
-                            FontSize="20"
-                            Text="Vídeo"
-                            VerticalOptions="Center" />
-                    </StackLayout>
+                    <StackLayout Margin="5">
+                        <StackLayout Orientation="Horizontal">
+                            <Label
+                                Margin="10"
+                                FontSize="18"
+                                Style="{StaticResource EntryIconVerde}"
+                                Text="{x:Static fontawesome:FontAwesomeIcons.Video}" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="20"
+                                Text="Vídeo"
+                                VerticalOptions="Center" />
+                        </StackLayout>
 
-                    <Frame
-                        Padding="0"
-                        BackgroundColor="#AAA"
-                        CornerRadius="5"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
-                        <WebView
-                            Grid.Row="1"
-                            Margin="0,-6,0,0"
+                        <Frame
+                            Padding="0"
+                            BackgroundColor="#AAA"
+                            CornerRadius="5"
                             HorizontalOptions="FillAndExpand"
-                            Source="{Binding CategoriaMaragogiLocal.UrlVideo}"
-                            VerticalOptions="FillAndExpand" />
-                    </Frame>
+                            VerticalOptions="FillAndExpand">
+                            <StackLayout>
+                                <WebView
+                                    Grid.Row="1"
+                                    HeightRequest="300"
+                                    Source="{Binding CategoriaMaragogiLocal.UrlVideo}"
+                                    VerticalOptions="Fill" />
+                            </StackLayout>
+
+                        </Frame>
+                    </StackLayout>
                     <!--  Vídeo  -->
 
                     <!--  História  -->
@@ -211,15 +215,9 @@
                             Color="#EEE" />
                     </StackLayout>
 
-                    <Frame
-                        Margin="5"
-                        Padding="5"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
-                        <WebView
-                            HorizontalOptions="FillAndExpand"
-                            Source="{Binding CategoriaMaragogiLocal.Localizacao}"
-                            VerticalOptions="FillAndExpand" />
+                    <Frame Margin="5">
+                        <WebView HeightRequest="500"
+                            Source="{Binding CategoriaMaragogiLocal.Localizacao}"/>
                     </Frame>
                     <!--  Localização  -->
                 </StackLayout>

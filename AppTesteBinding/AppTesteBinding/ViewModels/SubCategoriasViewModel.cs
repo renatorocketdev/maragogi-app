@@ -63,7 +63,7 @@
         {
             foreach (var item in this.ListLocal)
             {
-                item.Media = (item.QtdVotos == 0 || item.Nota == 0) ? 0 : Convert.ToDouble(item.Nota / item.QtdVotos);
+                item.Media = Math.Round((item.QtdVotos == 0 || item.Nota == 0) ? 0 : Convert.ToDouble(item.Nota / item.QtdVotos), 1);
 
                 if (item.Media == 0 && item.QtdVotos == 0)
                 {

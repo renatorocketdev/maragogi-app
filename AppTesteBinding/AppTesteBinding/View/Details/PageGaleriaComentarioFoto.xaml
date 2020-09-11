@@ -57,22 +57,17 @@
                 </Grid>
 
                 <Grid BackgroundColor="#DDD">
-                    
-                    <StackLayout>
-                        <Image
-                            Margin="0,40,0,0"
-                            Source="logo.png" />
+
+                    <StackLayout IsVisible="{Binding ListIsVisible}">
+                        <Image Source="logo.png" />
 
                         <Button
                             x:Name="NenhumaEmpresa"
                             Margin="0,50,0,0"
-                            IsVisible="{Binding ListIsVisible}"
                             Style="{StaticResource ButtonStyleTransparenteVerde}"
                             Text="POSTE A PRIMEIRA FOTO"
                             VerticalOptions="CenterAndExpand" />
                     </StackLayout>
-
-                    
 
                     <ActivityIndicator
                         IsRunning="{Binding ListIsBusy}"
@@ -84,6 +79,7 @@
                         HasUnevenRows="True"
                         ItemsSource="{Binding FotoComentario}"
                         SeparatorVisibility="None"
+                        SelectionMode="None"
                         VerticalOptions="FillAndExpand">
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -96,7 +92,7 @@
                                             CornerRadius="5"
                                             HasShadow="False">
                                             <StackLayout>
-                                                <Grid HeightRequest="50">
+                                                <Grid HeightRequest="50" RowSpacing="0">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="50" />
                                                         <ColumnDefinition Width="*" />
@@ -104,8 +100,7 @@
                                                     </Grid.ColumnDefinitions>
 
                                                     <Grid.RowDefinitions>
-                                                        <RowDefinition Height="*" />
-                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="2*" />
                                                         <RowDefinition Height="*" />
                                                     </Grid.RowDefinitions>
 
@@ -121,20 +116,16 @@
                                                     <Label
                                                         Grid.Row="0"
                                                         Grid.Column="1"
-                                                        FontAttributes="Italic"
                                                         FontSize="Medium"
                                                         Text="{Binding Usuario}"
                                                         TextColor="#AAA" />
 
                                                     <Label
                                                         Grid.Row="1"
-                                                        Grid.RowSpan="2"
                                                         Grid.Column="1"
-                                                        Grid.ColumnSpan="3"
-                                                        FontSize="Medium"
+                                                        FontSize="Micro"
                                                         Text="{Binding DataComentario}"
-                                                        TextColor="#AAA"
-                                                        VerticalTextAlignment="Center" />
+                                                        TextColor="#AAA"/>
                                                 </Grid>
 
                                                 <BoxView
@@ -180,7 +171,6 @@
                                             HorizontalOptions="FillAndExpand"
                                             VerticalOptions="Start"
                                             Color="#EEE" />
-
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>

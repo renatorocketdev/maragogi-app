@@ -1,5 +1,6 @@
 ﻿using AppTesteBinding.Models;
 using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -70,17 +71,27 @@ namespace AppTesteBinding.Service.Modulo
             }
         }
 
-        public async Task<string> Post(T value, string api)
+        public async Task<HttpResponseMessage> AddAvaliation(AvaliacaoEmpresa avaliacao)
         {
             using (var httpClient = new HttpClient())
             {
-                var url = new DataService().BuilderUri(api);
+                var uri = new Uri(string.Format("https://www.ocaribedemaragogi.com.br/api/APIAvaliacao/{0}", string.Empty));
 
-                var content = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json");
+                var content = new StringContent(JsonConvert.SerializeObject(avaliacao, Formatting.None), Encoding.UTF8, "application/json");
 
-                var response = await httpClient.PostAsync(url, content);
+                return await httpClient.PostAsync(uri, content);
+            }
+        }
 
-                return response.ReasonPhrase;
+        public async Task<HttpResponseMessage> AddFotoComentario(FotoComentario fotoComentario)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                var uri = new Uri(string.Format("https://www.ocaribedemaragogi.com.br/api/APIFotoComentario/{0}", string.Empty));
+
+                var content = new StringContent(JsonConvert.SerializeObject(fotoComentario, Formatting.None), Encoding.UTF8, "application/json");
+
+                return await httpClient.PostAsync(uri, content);
             }
         }
     }

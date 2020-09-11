@@ -180,7 +180,16 @@ namespace AppTesteBinding.ViewModels
                     Nota = Convert.ToDouble(result)
                 };
 
-                await new Service<AvaliacaoEmpresa>().Post(avaliacao, "APIAvaliacao");
+                var response = await new Service<AvaliacaoEmpresa>().AddAvaliation(avaliacao);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Muito bom, recebemos sua avaliação!!", response.ReasonPhrase, "OK");
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Erro", response.ReasonPhrase, "OK");
+                }
             }
         }
 
@@ -267,16 +276,7 @@ namespace AppTesteBinding.ViewModels
 
             if (Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
-                var result = await new EmpresaService().GetFundoEmpresaPath(nomeEmpresa, subCategoria);
-
-                if (result != null)
-                {
-                    this.Fotos = new ObservableCollection<FotosEstabelecimentos>(result);
-                }
-                else
-                {
-                    this.Fotos = new ObservableCollection<FotosEstabelecimentos>();
-                }
+                Fotos = await new EmpresaService().GetFundoEmpresaPath(nomeEmpresa, subCategoria);
             }
             else
             {

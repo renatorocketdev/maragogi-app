@@ -138,41 +138,46 @@
                 </Frame>
                 <!--  Nome  -->
 
-                <StackLayout Grid.Row="2" Margin="5">
-                    <BoxView
-                        BackgroundColor="MidnightBlue"
+                <BoxView Grid.Row="1"
+                        BackgroundColor="#309C99"
                         HeightRequest="10"
                         HorizontalOptions="FillAndExpand" />
 
-                    <!--  Vídeo  -->
-                    <StackLayout Orientation="Horizontal">
-                        <Label
-                            Margin="10"
-                            FontSize="18"
-                            Style="{StaticResource EntryIconVerde}"
-                            Text="{x:Static fontawesome:FontAwesomeIcons.Video}" />
-                        <Label
-                            FontAttributes="Bold"
-                            FontSize="20"
-                            Text="Vídeo"
-                            VerticalOptions="Center" />
-                    </StackLayout>
+                <StackLayout Grid.Row="2" Margin="5">
 
-                    <Frame
-                        Padding="0"
-                        BackgroundColor="#AAA"
-                        CornerRadius="5"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
-                        <WebView
-                            Grid.Row="1"
-                            Margin="0,-6,0,0"
+                    <!--  Vídeo  -->
+                    <StackLayout Margin="5">
+                        <StackLayout Orientation="Horizontal">
+                            <Label
+                                Margin="10"
+                                FontSize="18"
+                                Style="{StaticResource EntryIconVerde}"
+                                Text="{x:Static fontawesome:FontAwesomeIcons.Video}" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="20"
+                                Text="Vídeo"
+                                VerticalOptions="Center" />
+                        </StackLayout>
+
+                        <Frame
+                            Padding="0"
+                            BackgroundColor="#AAA"
+                            CornerRadius="5"
                             HorizontalOptions="FillAndExpand"
-                            Source="{Binding PraiaLocal.UrlVideo}"
-                            VerticalOptions="FillAndExpand" />
-                    </Frame>
-                    <!--  Vídeo  -->
+                            VerticalOptions="FillAndExpand">
+                            <StackLayout>
+                                <WebView
+                                    Grid.Row="1"
+                                    HeightRequest="300"
+                                    Source="{Binding PraiaLocal.UrlVideo}"
+                                    VerticalOptions="Fill" />
+                            </StackLayout>
 
+                        </Frame>
+                    </StackLayout>
+                    <!--  Vídeo  -->
+                    
                     <!--  História  -->
                     <StackLayout>
                         <Label
@@ -205,15 +210,8 @@
                             Color="#EEE" />
                     </StackLayout>
 
-                    <Frame
-                        Margin="5"
-                        Padding="5"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
-                        <WebView
-                            HorizontalOptions="FillAndExpand"
-                            Source="{Binding PraiaLocal.Localizacao}"
-                            VerticalOptions="FillAndExpand" />
+                    <Frame Margin="5">
+                        <WebView HeightRequest="500" Source="{Binding PraiaLocal.Localizacao}"/>
                     </Frame>
                     <!--  Localização  -->
                 </StackLayout>

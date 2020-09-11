@@ -110,7 +110,18 @@ namespace AppTesteBinding.ViewModels
                     Email = Settings.Email
                 };
 
-                await new Service<FotoComentario>().Post(comentario, "APIFotoComentario");
+                var response = await new Service<FotoComentario>().AddFotoComentario(comentario);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Erro", response.ReasonPhrase, "OK");
+                    await Application.Current.MainPage.Navigation.PopAsync();
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Foto Enviada com Sucesso!!", response.ReasonPhrase, "OK");
+                    await Application.Current.MainPage.Navigation.PopAsync();
+                }
             }
             else
             {
