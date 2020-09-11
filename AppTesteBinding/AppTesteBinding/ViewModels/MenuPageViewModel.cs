@@ -22,7 +22,7 @@ namespace AppTesteBinding.ViewModels
         string _displaymessage = null;
 
         public ICommand CmdNavigation { get; }
-        public ICommand CmdLigar { get; }
+        public ICommand CmdOpenWhats { get { return new Command(async () => await this.OpenWhats()); } }
         public string Displaymessage { get => _displaymessage; set => _displaymessage = value; }
 
         public MenuPageViewModel()
@@ -33,7 +33,6 @@ namespace AppTesteBinding.ViewModels
             Saudacao();
 
             CmdNavigation = new Command<string> (async (x) => await Navigation(x));
-            CmdLigar = new Command(LigarNumero);
         }
 
         public void Saudacao()
@@ -98,10 +97,19 @@ namespace AppTesteBinding.ViewModels
             }
         }
 
-        public void LigarNumero()
+        public async Task OpenWhats()
         {
-            ColetaDados("Ligar");
-            Launcher.TryOpenAsync(new Uri("tel:82981245920"));
+            var message = "Oi, Tudo Bem? Encontrei sua empresa no App Maragogi e gostaria de saber mais informações sobre a sua empresa!";
+            var cleanNumber = "5582981245920";
+
+            try
+            {
+                await Launcher.OpenAsync(new Uri($"https://wa.me/{cleanNumber}?text={message}"));
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
+            }
         }
 
         public void ColetaDados(string Pagina)

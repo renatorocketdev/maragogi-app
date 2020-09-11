@@ -84,7 +84,7 @@
                             Text="{x:Static fontawesome:FontAwesomeIcons.MapMarkedAlt}" />
                         <Button
                             Grid.Row="3"
-                            Command="{Binding CmdLigar}"
+                            Command="{Binding CmdOpenWhats}"
                             Style="{StaticResource ButtonIconeBrancoFill}"
                             Text="{x:Static fontawesome:FontAwesomeIcons.Phone}" />
                         <Button

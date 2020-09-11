@@ -53,14 +53,21 @@ namespace AppTesteBinding.View.HasAccessInternet.Categories
 
             listViewPortuguese.SelectedItem = -1;
 
-            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+            if (Cateogoria.SubCategoria.Contains("inicial"))
             {
-                await Navigation.PushAsync(new SubCategoriasPage(Cateogoria.SubCategoria));
+                await Navigation.PopAsync();
             }
             else
             {
-                await Navigation.PushAsync(new NoConnection());
-            } 
+                if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+                {
+                    await Navigation.PushAsync(new SubCategoriasPage(Cateogoria.SubCategoria));
+                }
+                else
+                {
+                    await Navigation.PushAsync(new NoConnection());
+                }
+            }
         }
 
         public void ColetaDados(string Empresa, string Categoria)

@@ -162,6 +162,10 @@ namespace AppTesteBinding.ViewModels
 
         public ICommand CmdOpenWhats { get { return new Command(async () => await this.OpenWhats()); } }
 
+        public ICommand CmdOpenFacebook { get { return new Command(async () => await this.OpenFacebook()); } }
+
+        public ICommand CmdOpenInsta { get { return new Command(async () => await this.OpenInsta()); } }
+
         private async Task AvaliarEmpresa()
         {
             var result = await Application.Current.MainPage
@@ -295,11 +299,12 @@ namespace AppTesteBinding.ViewModels
 
         public async Task OpenWhats()
         {
-            var cleanNumber = "55" + this.EmpresaLocal.Telefone1Empresa.Replace("(", string.Empty).Replace(")", string.Empty).Replace("-", string.Empty).Replace(" ", string.Empty);
+            var message = "Oi, Tudo Bem? Encontrei sua empresa no App Maragogi e gostaria de saber mais informações sobre a sua empresa!";
+            var cleanNumber = "55" + this.EmpresaLocal.Telefone1Empresa.Replace("(", string.Empty).Replace(")", string.Empty).Replace("-", string.Empty);
 
             try
             {
-                await Launcher.OpenAsync(new Uri($"https://wa.me/{cleanNumber}"));
+                await Launcher.OpenAsync(new Uri($"https://wa.me/{cleanNumber}?text={message}"));
             }
             catch (Exception ex)
             {
@@ -309,7 +314,7 @@ namespace AppTesteBinding.ViewModels
 
         public async Task OpenInsta()
         {
-            var uri = $"instagram://user?username={this.EmpresaLocal.Instagram}";
+            var uri = $"instagram://user?username={EmpresaLocal.Instagram}";
 
             try
             {

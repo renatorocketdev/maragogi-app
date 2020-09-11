@@ -245,7 +245,11 @@
                         Orientation="Horizontal">
                         <Label Style="{StaticResource ButtonIconAzul}" Text="{x:Static fontawesome:FontAwesomeIcons.Facebook}" />
 
-                        <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.Facebook}" />
+                        <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.Facebook}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CmdOpenFacebook}" NumberOfTapsRequired="1" />
+                            </Label.GestureRecognizers>
+                        </Label>
                     </StackLayout>
 
                     <StackLayout
@@ -254,7 +258,11 @@
                         Orientation="Horizontal">
                         <Label Style="{StaticResource ButtonIconAzul}" Text="{x:Static fontawesome:FontAwesomeIcons.Instagram}" />
 
-                        <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.Instagram}" />
+                        <Label Style="{StaticResource lblSobreEmpresa}" Text="{Binding EmpresaLocal.Instagram}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CmdOpenInsta}" NumberOfTapsRequired="1" />
+                            </Label.GestureRecognizers>
+                        </Label>
                     </StackLayout>
 
                     <StackLayout
