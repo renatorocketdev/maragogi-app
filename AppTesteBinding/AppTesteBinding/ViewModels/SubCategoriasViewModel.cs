@@ -43,14 +43,12 @@
                     Categoria = categoria;
                 }
             }
-            else if (App.Database.HasEnterprises(categoria))
+            else
             {
                 Fotos = new ObservableCollection<FotosEstabelecimentos>
                 {
                     new FotosEstabelecimentos { Foto = "fundooffline.png" },
                 };
-
-                _ = AddFromDataBaseAsync(categoria);
 
                 Categoria = categoria;
             }
@@ -86,26 +84,17 @@
         /// <param name="categoria">Nome da categoria.</param>
         public async Task AddFromAPIAsync(string categoria)
         {
-            this.CategoriasIsBusy = true;
-
-            App.Database.DeleteCategories(categoria);
+            CategoriasIsBusy = true;
 
             var result = await new Service<Empresa>().Get("APIEmpresa", "SubCategoria", categoria);
 
-            this.HasNoEnterprises = result.Count == 0;
+            HasNoEnterprises = result.Count == 0;
 
-            this.ListLocal = new List<Empresa>(result.OrderByDescending(x => x.Nota).ToList());
+            ListLocal = new List<Empresa>(result.OrderByDescending(x => x.Nota).ToList());
 
-            App.Database.SaveEnterprises(this.ListLocal);
+            SetRating();
 
-            this.SetRating();
-
-            this.CategoriasIsBusy = false;
-        }
-
-        public async Task AddFromDataBaseAsync(string categoria)
-        {
-            ListLocal = await App.Database.GetEnterpriseList(categoria);
+            CategoriasIsBusy = false;
         }
 
         public async Task GetNameCategories(string categoria)

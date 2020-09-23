@@ -1,15 +1,8 @@
 ﻿using AppTesteBinding.Models;
 using AppTesteBinding.Service;
-using AppTesteBinding.Service.Modulo;
 using AppTesteBinding.Utils;
 using AppTesteBinding.View.Details;
-using Plugin.Media;
-using Plugin.Media.Abstractions;
-using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
-using System;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -18,7 +11,8 @@ namespace AppTesteBinding.ViewModels
 {
     public class CategoriasMaragogiDetailsViewModel : Manager<CategoriaMaragogi>
     {
-        string _Foto;
+        private string _Foto;
+
         public string Foto
         {
             get { return _Foto; }
@@ -26,14 +20,12 @@ namespace AppTesteBinding.ViewModels
         }
 
         private CategoriaMaragogi _CategoriaMaragogi;
+
         public CategoriaMaragogi CategoriaMaragogiLocal
         {
             get { return _CategoriaMaragogi; }
             set { _CategoriaMaragogi = value; OnPropertyChanged(nameof(CategoriaMaragogiLocal)); }
         }
-
-        string _Comment = null;
-        public string Comment { get => _Comment; set => _Comment = value; }
 
         public ICommand CmdCompartilhar { get; }
         public ICommand CmdGaleria { get; }
@@ -41,7 +33,6 @@ namespace AppTesteBinding.ViewModels
 
         public CategoriasMaragogiDetailsViewModel()
         {
-
         }
 
         public CategoriasMaragogiDetailsViewModel(CategoriaMaragogi categoriaMaragogi)

@@ -25,15 +25,6 @@ namespace AppTesteBinding.ViewModels
 
                 _ = AddFromAPIAsync(categoria);
             }
-            else if (App.Database.HasCategories(categoria))
-            {
-                Fotos = new ObservableCollection<FotosEstabelecimentos>
-                {
-                    new FotosEstabelecimentos { Foto = "fundooffline.png" }
-                };
-
-                _ = AddFromDataBaseAsync(categoria);
-            }
             else
             {
                 Fotos = new ObservableCollection<FotosEstabelecimentos>
@@ -60,8 +51,6 @@ namespace AppTesteBinding.ViewModels
         {
             CategoriasIsBusy = true;
 
-            App.Database.DeleteCategories(Categoria);
-
             List<Categoria> cat;
 
             var res = await new Service<Categoria>().Get("APICategorias");
@@ -72,15 +61,7 @@ namespace AppTesteBinding.ViewModels
 
             ListLocal = new List<Categoria>(result);
 
-            App.Database.SaveCategories(ListLocal);
-
             CategoriasIsBusy = false;
-        }
-
-        public async Task AddFromDataBaseAsync(string Categoria)
-        {
-            var result = await App.Database.GetCategoriesList(Categoria);
-            ListLocal = new List<Categoria>(result);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AppTesteBinding.Service
 {
@@ -14,6 +15,17 @@ namespace AppTesteBinding.Service
         public Uri BuilderUri(string uri)
         {
             return new Uri(string.Format("{0}/{1}/{2}", ApiBaseAddress, uri, string.Empty));
+        }
+
+        public Uri BuilderUri(Dictionary<string, string> keyValues) 
+        {
+            var uri = "";
+            foreach (var item in keyValues)
+            {
+                uri += $"/{item.Key}={item.Value}";
+            }
+
+            return new Uri(string.Format("{0}/{1}", ApiBaseAddress, uri));
         }
 
         public DataService()

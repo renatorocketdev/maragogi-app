@@ -17,26 +17,28 @@ namespace AppTesteBinding.View.SecondPages
             BindingContext = new MaragogiViewModel();
         }
 
-        private void Lista_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void Lista_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            CategoriaMaragogi Item = e.Item as CategoriaMaragogi;
+            var Item = e.Item as CategoriaMaragogi;
 
             Lista.SelectedItem = -0;
 
-            if (Item.Nome.Equals("Praias"))
+            if (Item.Nome.Equals("História"))
             {
-                Navigation.PushAsync(new PagePraias());
+                await Navigation.PushAsync(new PageHistoriaMaragogiDetails());
             }
-            else if(Item.Nome.Equals("Pontos Turísticos"))
+            else if (Item.Nome.Equals("Praias"))
             {
-                Navigation.PushAsync(new PagePontos());
+                await Navigation.PushAsync(new PagePraias());
+            }
+            else if (Item.Nome.Equals("Pontos Turísticos"))
+            {
+                await Navigation.PushAsync(new PagePontos());
             }
             else
             {
-                Navigation.PushAsync(new PageHistoriaMaragogiDetails());
+                await Navigation.PushAsync(new PageMaragogiDetails(Item));
             }
-
-           
         }
     }
 }

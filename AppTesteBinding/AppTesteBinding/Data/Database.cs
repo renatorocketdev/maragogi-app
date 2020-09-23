@@ -1,9 +1,11 @@
 ﻿using AppTesteBinding.Models;
 using SQLite;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Threading.Tasks;
-using System;
 using Xamarin.Forms;
 
 namespace AppTesteBinding.Data
@@ -21,331 +23,173 @@ namespace AppTesteBinding.Data
             _database.CreateTableAsync<CategoriaMaragogi>().Wait();
             _database.CreateTableAsync<Empresa>().Wait();
             _database.CreateTableAsync<HistoriaMaragogi>().Wait();
-            _database.CreateTableAsync<Praias>().Wait();
         }
 
-        #region Delete
+        //public void Delete<T>(string filter = "")
+        //{
+        //    try
+        //    {
+        //        string sql;
+        //        if (string.IsNullOrEmpty(filter))
+        //        {
+        //            sql = $"DELETE FROM {typeof(T).Name}";
+        //        }
+        //        else
+        //        {
+        //            sql = $"DELETE FROM {typeof(T).Name} WHERE MainCategoria = '{filter}'";
+        //        }
 
-        public void DeleteCategoriasMaragogi()
-        {
-            try
-            {
-                _database.ExecuteAsync($"DELETE FROM CategoriaMaragogi");
-            }
-            catch (Exception ex)
-            {
-                Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-            }
-        }
+        //        _database.ExecuteAsync(sql);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
+        //    }
+        //}
 
-        public void DeleteCategories(string Categoria)
-        {
-            try
-            {
-                _database.ExecuteAsync($"DELETE FROM Categoria WHERE MainCategoria = '{Categoria}'");
-            }
-            catch (Exception ex)
-            {
-                Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-            }
-        }
+        //public void Save<T>(IEnumerable<T> values)
+        //{
+        //    try
+        //    {
+        //        _database.InsertAllAsync(values);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
+        //    }
+        //}
 
-        public void DeleteCategoriesEnglish(string Categoria)
-        {
-            try
-            {
-                _database.ExecuteAsync($"DELETE FROM CategoriaEnglish WHERE MainCategoria = '{Categoria}'");
-            }
-            catch (Exception ex)
-            {
-                Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-            }
-        }
+        //public async Task<List<CategoriaEnglish>> GetCategoriesEnglishList(string filtro)
+        //{
+        //    try
+        //    {
+        //        return await _database.QueryAsync<CategoriaEnglish>($"SELECT * FROM CategoriaEnglish WHERE MainCategoria = '{filtro}'");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
+        //        return null;
+        //    }
+        //}
 
-        public void DeletePraias()
-        {
-            try
-            {
-                _database.ExecuteAsync($"DELETE FROM Praias");
-            }
-            catch (Exception ex)
-            {
-                Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-            }
-        }
+        //public async Task<List<Categoria>> GetCategoriesList(string filtro)
+        //{
+        //    try
+        //    {
+        //        return await _database.QueryAsync<Categoria>($"SELECT DISTINCT * FROM Categoria WHERE MainCategoria = '{filtro}'");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
+        //        return null;
+        //    }
+        //}
 
-        public void DeleteHistoriaMaragogi()
-        {
-            try
-            {
-                _database.ExecuteAsync($"DELETE FROM HistoriaMaragogi");
-            }
-            catch (Exception ex)
-            {
-                Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-            }
-        }
+        //public async Task<IEnumerable<CategoriaMaragogi>> GetCategoriesMaragogiList()
+        //{
+        //    try
+        //    {
+        //        return await _database.QueryAsync<CategoriaMaragogi>($"SELECT * FROM CategoriaMaragogi");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
+        //        return null;
+        //    }
+        //}
 
-        #endregion Delete
+        //public async Task<List<Empresa>> GetEnterpriseList(string filtro)
+        //{
+        //    try
+        //    {
+        //        return await _database.QueryAsync<Empresa>($"SELECT * FROM Empresa WHERE SubCategoria  = '{filtro}'");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
+        //        return new List<Empresa>();
+        //    }
+        //}
 
-        #region GetList
+        //public Task<List<Empresa>> GetEnterpriseByName(string filtro)
+        //{
+        //    try
+        //    {
+        //        return _database.QueryAsync<Empresa>($"SELECT * FROM Empresa WHERE NomeEmpresa  = '{filtro}'");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
+        //        return null;
+        //    }
+        //}
 
-        public async Task<List<CategoriaEnglish>> GetCategoriesEnglishList(string filtro)
-        {
-            try
-            {
-                return await _database.QueryAsync<CategoriaEnglish>($"SELECT * FROM CategoriaEnglish WHERE MainCategoria = '{filtro}'");
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-                return null;
-            }
-        }
+        //public async Task<HistoriaMaragogi> GetHistoriaMaragogi()
+        //{
+        //    try
+        //    {
+        //        var result = await _database.QueryAsync<HistoriaMaragogi>($"SELECT * FROM HistoriaMaragogi");
 
-        public async Task<List<Categoria>> GetCategoriesList(string filtro)
-        {
-            try
-            {
-                return await _database.QueryAsync<Categoria>($"SELECT DISTINCT * FROM Categoria WHERE MainCategoria = '{filtro}'");
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-                return null;
-            }
-        }
+        //        if (result != null)
+        //        {
+        //            return result.FirstOrDefault();
+        //        }
+        //        else
+        //        {
+        //            return new HistoriaMaragogi();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
+        //        return null;
+        //    }
+        //}
 
-        public async Task<List<CategoriaMaragogi>> GetCategoriesMaragogiList()
-        {
-            try
-            {
-                var result = await _database.QueryAsync<CategoriaMaragogi>($"SELECT * FROM CategoriaMaragogi");
-                
-                if(result != null)
-                {
-                    return result;
-                }
-                else
-                {
-                    return new List<CategoriaMaragogi>();
-                }
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-                return new List<CategoriaMaragogi>();
-            }
-        }
+        //#region Check if has something
 
-        public async Task<List<Empresa>> GetEnterpriseList(string filtro)
-        {
-            try
-            {
-                return await _database.QueryAsync<Empresa>($"SELECT * FROM Empresa WHERE SubCategoria  = '{filtro}'");
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-                return new List<Empresa>();
-            }
-        }
+        //public bool HasCategories(string pagina)
+        //{
+        //    var result = _database.QueryAsync<Categoria>($"SELECT * FROM Categoria WHERE MainCategoria = '{pagina}'").Result;
 
-        public async Task<List<Praias>> GetPraiasList()
-        {
-            try
-            {
-                var result = await _database.QueryAsync<Praias>($"SELECT * FROM Praias"); ;
+        //    if (result.Count == 0)
+        //        return false;
+        //    else
+        //        return true;
+        //}
 
-                if (result != null)
-                {
-                    return result;
-                }
-                else
-                {
-                    return new List<Praias>();
-                }
-            }
-            catch (Exception ex)
-            {
-                Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-                return null;
-            }
-        }
+        //public bool HasCategoriesEnglish(string pagina)
+        //{
+        //    var result = _database.QueryAsync<CategoriaEnglish>($"SELECT * FROM CategoriaEnglish WHERE MainCategoria = '{pagina}'").Result;
 
-        #endregion GetList
+        //    if (result.Count == 0)
+        //        return false;
+        //    else
+        //        return true;
+        //}
 
-        #region Get
+        //public bool HasEnterprises(string SubCategoria)
+        //{
+        //    var result = _database.QueryAsync<Empresa>($"SELECT * FROM Empresa WHERE SubCategoria = '{SubCategoria}'").Result;
 
-        public Task<List<Empresa>> GetEnterpriseByName(string filtro)
-        {
-            try
-            {
-                return _database.QueryAsync<Empresa>($"SELECT * FROM Empresa WHERE NomeEmpresa  = '{filtro}'");
-            }
-            catch (Exception ex)
-            {
-                Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-                return null;
-            }
-        }
+        //    if (result.Count == 0)
+        //        return false;
+        //    else
+        //        return true;
+        //}
 
-        public async Task<HistoriaMaragogi> GetHistoriaMaragogi()
-        {
-            try
-            {
-                var result = await _database.QueryAsync<HistoriaMaragogi>($"SELECT * FROM HistoriaMaragogi");
+        //#endregion Check if has something
 
-                if (result != null)
-                {
-                    return result.FirstOrDefault();
-                }
-                else
-                {
-                    return new HistoriaMaragogi();
-                }
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-                return null;
-            }
-        }
-
-        public async Task<Praias> GetPraiasByName(string Nome)
-        {
-            try
-            {
-                var result = await _database.QueryAsync<Praias>($"SELECT * FROM Praias WHERE Nome = '{Nome}'");
-                return result.FirstOrDefault();
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-                return null;
-            }
-        }
-
-        #endregion Get
-
-        #region Check if has something
-
-        public bool HasCategories(string pagina)
-        {
-            var result = _database.QueryAsync<Categoria>($"SELECT * FROM Categoria WHERE MainCategoria = '{pagina}'").Result;
-
-            if (result.Count == 0)
-                return false;
-            else
-                return true;
-        }
-
-        public bool HasCategoriesEnglish(string pagina)
-        {
-            var result = _database.QueryAsync<CategoriaEnglish>($"SELECT * FROM CategoriaEnglish WHERE MainCategoria = '{pagina}'").Result;
-
-            if (result.Count == 0)
-                return false;
-            else
-                return true;
-        }
-
-        public bool HasEnterprises(string SubCategoria)
-        {
-            var result = _database.QueryAsync<Empresa>($"SELECT * FROM Empresa WHERE SubCategoria = '{SubCategoria}'").Result;
-
-            if (result.Count == 0)
-                return false;
-            else
-                return true;
-        }
-
-        public bool HasPraias()
-        {
-            var result = _database.QueryAsync<Praias>($"SELECT * FROM Praias").Result;
-
-            if (result.Count == 0)
-                return false;
-            else
-                return true;
-        }
-
-        #endregion Check if has something
-
-        #region Save To Database
-
-        public void SaveCategoriasMaragogi(IEnumerable<CategoriaMaragogi> list)
-        {
-            try
-            {
-                _database.InsertAllAsync(list);
-            }
-            catch (Exception ex)
-            {
-                Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-            }
-        }
-
-        public void SaveCategories(IEnumerable<Categoria> list)
-        {
-            try
-            {
-                _database.InsertAllAsync(list);
-            }
-            catch (Exception ex)
-            {
-                Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-            }
-        }
-
-        public void SaveCategoriesEnglish(IEnumerable<CategoriaEnglish> list)
-        {
-            try
-            {
-                _database.InsertAllAsync(list);
-            }
-            catch (Exception ex)
-            {
-                Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-            }
-        }
-
-        public void SaveEnterprises(IEnumerable<Empresa> list)
-        {
-            try
-            {
-                _database.InsertAllAsync(list);
-            }
-            catch (Exception ex)
-            {
-                Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-            }
-        }
-
-        public void SaveHistoriaMaragogi(HistoriaMaragogi historiaMaragogi)
-        {
-            try
-            {
-                _database.InsertAsync(historiaMaragogi);
-            }
-            catch (Exception ex)
-            {
-                Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-            }
-        }
-
-        public void SavePraias(IEnumerable<Praias> list)
-        {
-            try
-            {
-                _database.InsertAllAsync(list);
-            }
-            catch (Exception ex)
-            {
-                Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
-            }
-        }
-
-        #endregion Save To Database
+        //public void SaveHistoriaMaragogi(HistoriaMaragogi historiaMaragogi)
+        //{
+        //    try
+        //    {
+        //        _database.InsertAsync(historiaMaragogi);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "Ok");
+        //    }
+        //}
     }
 }

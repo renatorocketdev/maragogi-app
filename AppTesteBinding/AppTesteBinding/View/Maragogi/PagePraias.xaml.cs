@@ -15,11 +15,11 @@ namespace AppTesteBinding.View.Maragogi
 
         private void Lista_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            Praias Item = e.Item as Praias;
+            var Item = e.Item as CategoriaMaragogi;
 
             Lista.SelectedItem = -0;
 
-            Navigation.PushAsync(new PagePraiaDetails(Item));
+            Navigation.PushAsync(new PageMaragogiDetails(Item));
         }
 
         private void ImageButton_Clicked(object sender, EventArgs e)

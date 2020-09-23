@@ -5,7 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:service="clr-namespace:AppTesteBinding.Service"
     xmlns:viewmodels="clr-namespace:AppTesteBinding.ViewModels"
@@ -71,7 +70,7 @@
                     Margin="0"
                     HorizontalOptions="Center"
                     Style="{StaticResource LabelMenu}"
-                    Text="Maragogi" />
+                    Text="Pontos Turísticos" />
             </Frame>
 
             <BoxView
@@ -81,6 +80,13 @@
                 HeightRequest="10"
                 HorizontalOptions="FillAndExpand" />
 
+            <ActivityIndicator
+                Grid.Row="2"
+                HorizontalOptions="Center"
+                IsRunning="{Binding CategoriasIsBusy}"
+                IsVisible="{Binding CategoriasIsBusy}"
+                VerticalOptions="Center" />
+
             <ListView
                 x:Name="Lista"
                 Grid.Row="2"
@@ -88,12 +94,12 @@
                 CachingStrategy="RecycleElement"
                 HasUnevenRows="True"
                 ItemTapped="Lista_ItemTapped"
-                ItemsSource="{Binding ListLocal}"
+                ItemsSource="{Binding ObservableCollectionLocal}"
                 SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
+                            <Grid Padding="15,5,0,5">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto" />
                                     <ColumnDefinition Width="*" />
@@ -101,9 +107,8 @@
 
                                 <Image
                                     Grid.Column="0"
-                                    Margin="10,5,0,5"
-                                    Aspect="Fill"
-                                    Source="{Binding Foto}"
+                                    Margin="5,0,0,0"
+                                    Source="{Binding Icone, Converter={StaticResource ByteArrayToImage}}"
                                     Style="{StaticResource ImageMenu}" />
                                 <Label
                                     Grid.Column="1"

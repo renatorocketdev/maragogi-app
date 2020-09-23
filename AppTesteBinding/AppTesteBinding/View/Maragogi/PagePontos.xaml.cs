@@ -17,7 +17,7 @@ namespace AppTesteBinding.View.Maragogi
         {
             var Item = e.Item as CategoriaMaragogi;
 
-            Navigation.PushAsync(new PagePontoDetails(Item));
+            Navigation.PushAsync(new PageMaragogiDetails(Item));
 
             Lista.SelectedItem = -1;
         }

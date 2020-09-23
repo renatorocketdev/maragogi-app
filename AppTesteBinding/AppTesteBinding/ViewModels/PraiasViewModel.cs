@@ -8,7 +8,7 @@ using Xamarin.Essentials;
 
 namespace AppTesteBinding.ViewModels
 {
-    public class PraiasViewModel : Manager<Praias>
+    public class PraiasViewModel : Manager<CategoriaMaragogi>
     {
         #region Constructors
 
@@ -20,14 +20,12 @@ namespace AppTesteBinding.ViewModels
 
                 AddFromAPIAsync();
             }
-            else if (App.Database.HasPraias())
+            else if (false)
             {
                 Fotos = new ObservableCollection<FotosEstabelecimentos>
                 {
                     new FotosEstabelecimentos { Foto = "fundooffline.png" }
                 };
-
-                AddFromDataBaseAsync();
             }
             else
             {
@@ -44,18 +42,9 @@ namespace AppTesteBinding.ViewModels
         {
             CategoriasIsBusy = true;
 
-            App.Database.DeletePraias();
-
-            ListLocal = await new Service<Praias>().Get("APIPraias");
-
-            App.Database.SavePraias(ListLocal);
+            ListLocal = await new Service<CategoriaMaragogi>().Get("APICategoriasMaragogi", "Categoria", "Praias");
 
             CategoriasIsBusy = false;
-        }
-
-        private async void AddFromDataBaseAsync()
-        {
-            ListLocal = new List<Praias>(await App.Database.GetPraiasList());
         }
 
         private async void AddImagesFromAPIAsync()

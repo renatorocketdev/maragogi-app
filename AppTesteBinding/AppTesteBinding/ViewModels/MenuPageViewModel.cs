@@ -27,9 +27,6 @@ namespace AppTesteBinding.ViewModels
 
         public MenuPageViewModel()
         {
-            App.Database.SaveCategoriasMaragogi(Persist.CategoriaMaragogis);
-            App.Database.SaveCategories(Persist.Categorias);
-            
             Saudacao();
 
             CmdNavigation = new Command<string> (async (x) => await Navigation(x));

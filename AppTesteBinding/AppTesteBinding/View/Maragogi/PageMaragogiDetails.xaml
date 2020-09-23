@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="AppTesteBinding.View.Maragogi.PagePraiaDetails"
+    x:Class="AppTesteBinding.View.Maragogi.PageMaragogiDetails"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
@@ -12,7 +12,7 @@
     NavigationPage.HasNavigationBar="False"
     mc:Ignorable="d">
     <ContentPage.BindingContext>
-        <viewmodels1:PraiasDetailsViewModel />
+        <viewmodels1:CategoriasMaragogiDetailsViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
@@ -42,6 +42,7 @@
                             <OnIdiom.Phone>
                                 <DataTemplate>
                                     <ffimageloading:CachedImage Aspect="AspectFill" Source="{Binding Foto}" />
+
                                 </DataTemplate>
                             </OnIdiom.Phone>
                             <OnIdiom.Tablet>
@@ -50,6 +51,7 @@
                                         Aspect="Fill"
                                         Source="{Binding Foto}"
                                         WidthRequest="1300" />
+
                                 </DataTemplate>
                             </OnIdiom.Tablet>
                         </OnIdiom>
@@ -75,8 +77,12 @@
                             <On Platform="Android" Value="10" />
                         </OnPlatform>
                     </Frame.Margin>
-
                     <StackLayout>
+                        <ImageButton
+                            x:Name="Comentar"
+                            Source="controlecurtir"
+                            Style="{StaticResource IconeLateral}" />
+
                         <ImageButton
                             Command="{Binding CmdCompartilhar}"
                             Source="controlecompartilhar"
@@ -134,7 +140,7 @@
                         Margin="0"
                         HorizontalOptions="Center"
                         Style="{StaticResource LabelMenu}"
-                        Text="{Binding PraiaLocal.Nome}" />
+                        Text="{Binding CategoriaMaragogiLocal.Nome}" />
                 </Frame>
                 <!--  Nome  -->
 
@@ -144,7 +150,6 @@
                         HorizontalOptions="FillAndExpand" />
 
                 <StackLayout Grid.Row="2" Margin="5">
-
                     <!--  Vídeo  -->
                     <StackLayout Margin="5">
                         <StackLayout Orientation="Horizontal">
@@ -170,20 +175,20 @@
                                 <WebView
                                     Grid.Row="1"
                                     HeightRequest="300"
-                                    Source="{Binding PraiaLocal.UrlVideo}"
+                                    Source="{Binding CategoriaMaragogiLocal.UrlVideo}"
                                     VerticalOptions="Fill" />
                             </StackLayout>
 
                         </Frame>
                     </StackLayout>
                     <!--  Vídeo  -->
-                    
+
                     <!--  História  -->
                     <StackLayout>
                         <Label
                             FontAttributes="Bold"
                             FontSize="20"
-                            Text="História da Praia" />
+                            Text="História do Lugar" />
                         <BoxView
                             HeightRequest="1"
                             HorizontalOptions="FillAndExpand"
@@ -192,7 +197,7 @@
                     </StackLayout>
 
                     <StackLayout Margin="5">
-                        <Label Text="{Binding PraiaLocal.Descricao}" />
+                        <Label Text="{Binding CategoriaMaragogiLocal.Descricao}" />
                     </StackLayout>
                     <!--  História  -->
 
@@ -211,7 +216,8 @@
                     </StackLayout>
 
                     <Frame Margin="5">
-                        <WebView HeightRequest="500" Source="{Binding PraiaLocal.Localizacao}"/>
+                        <WebView HeightRequest="500"
+                            Source="{Binding CategoriaMaragogiLocal.Localizacao}"/>
                     </Frame>
                     <!--  Localização  -->
                 </StackLayout>

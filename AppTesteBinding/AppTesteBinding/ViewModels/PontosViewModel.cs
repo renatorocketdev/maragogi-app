@@ -1,6 +1,7 @@
 ﻿using AppTesteBinding.Models;
 using AppTesteBinding.Service.Modulo;
 using AppTesteBinding.View.Maragogi;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -14,14 +15,7 @@ namespace AppTesteBinding.ViewModels
 
         public PontosViewModel()
         {
-            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
-            {
-                AddFromAPIAsync();
-            }
-            else
-            {
-                AddFromDataBaseAsync();
-            }
+            _ = AddFromAPIAsync();
         }
 
         #endregion Constructors
@@ -34,22 +28,13 @@ namespace AppTesteBinding.ViewModels
 
         #region Methods
 
-        public async void AddFromAPIAsync()
+        public async Task AddFromAPIAsync()
         {
             CategoriasIsBusy = true;
 
-            App.Database.DeleteCategoriasMaragogi();
-
-            ListLocal = await new Service<CategoriaMaragogi>().Get("APICategoriasMaragogi");
-
-            App.Database.SaveCategoriasMaragogi(ListLocal);
+            ListLocal = await new Service<CategoriaMaragogi>().Get("APICategoriasMaragogi", "Categoria", "Pontos");
 
             CategoriasIsBusy = false;
-        }
-
-        public async void AddFromDataBaseAsync()
-        {
-            ListLocal = await App.Database.GetCategoriesMaragogiList();
         }
 
         private async Task PopAsync()

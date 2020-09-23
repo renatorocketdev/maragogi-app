@@ -24,6 +24,7 @@ namespace AppTesteBinding.Models
 
         public List<FotosEstabelecimentos> _FotoCategoria;
         public List<T> _ListLocal;
+        public ObservableCollection<T> _ObservableCollectionLocal;
         public ObservableCollection<FotosEstabelecimentos> _Fotos;
         public TranslateService TranslateService = new TranslateService();
 
@@ -83,6 +84,12 @@ namespace AppTesteBinding.Models
         {
             get { return _ListLocal; }
             set { _ListLocal = value; OnPropertyChanged(nameof(ListLocal)); }
+        }
+
+        public ObservableCollection<T> ObservableCollectionLocal
+        {
+            get { return _ObservableCollectionLocal; }
+            set { _ObservableCollectionLocal = value; OnPropertyChanged(nameof(ObservableCollectionLocal)); }
         }
 
         public bool Portuguese

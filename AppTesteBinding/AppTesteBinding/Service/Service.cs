@@ -42,6 +42,26 @@ namespace AppTesteBinding.Service.Modulo
             }
         }
 
+        public async Task<List<T>> GetByMulti(string api, Dictionary<string, string> keyValues)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                Uri url = new DataService().BuilderUri(keyValues);
+
+                var response = await httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+
+                    if (!string.IsNullOrWhiteSpace(json))
+                        return JsonConvert.DeserializeObject<List<T>>(json);
+                }
+
+                return new List<T>();
+            }
+        }
+
         public async Task<ObservableCollection<T>> ObservableGet(string api, string parameter = "", string arg = "")
         {
             using (var httpClient = new HttpClient())

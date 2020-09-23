@@ -26,15 +26,6 @@ namespace AppTesteBinding.ViewModels
                 TraslateTextCategoria(Categoria);
                 AddFromAPIAsync(Categoria);
             }
-            else if(App.Database.HasCategoriesEnglish(Categoria))
-            {
-                Fotos = new ObservableCollection<FotosEstabelecimentos>
-                {
-                    new FotosEstabelecimentos { Foto = "fundooffline.png" }
-                };
-
-                AddFromDataBaseAsync(Categoria);
-            }
             else
             {
                 Fotos = new ObservableCollection<FotosEstabelecimentos>
@@ -57,17 +48,11 @@ namespace AppTesteBinding.ViewModels
 
             FotoIsBusy = false;
         }
-        public async void AddFromDataBaseAsync(string Categoria)
-        {
-            var result = await App.Database.GetCategoriesEnglishList(Categoria);
-            ListLocal = new List<CategoriaEnglish>(result);
-        }
 
         public async void AddFromAPIAsync(string Categoria)
         {
             CategoriasIsBusy = true;
 
-            App.Database.DeleteCategories(Categoria);
 
             List<CategoriaEnglish> cat = new List<CategoriaEnglish>();
 
@@ -87,8 +72,6 @@ namespace AppTesteBinding.ViewModels
             }
 
             ListLocal = new List<CategoriaEnglish>(cat);
-
-            App.Database.SaveCategoriesEnglish(ListLocal);
 
             CategoriasIsBusy = false;
         }

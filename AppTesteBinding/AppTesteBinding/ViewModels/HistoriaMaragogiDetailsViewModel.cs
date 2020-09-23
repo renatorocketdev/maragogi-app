@@ -39,20 +39,9 @@ namespace AppTesteBinding.ViewModels
 
         public HistoriaMaragogiDetailsViewModel()
         {
-            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
-            {
-                AddImagesFromAPIAsync();
-                AddFromAPI();
-            }
-            else
-            {
-                Fotos = new ObservableCollection<FotosEstabelecimentos>
-                {
-                    new FotosEstabelecimentos { Foto = "fundooffline.png" }
-                };
+            _ = AddFromAPI();
 
-                AddFromDatabase();
-            }
+            _ = AddImagesFromAPIAsync();
         }
 
         #endregion Constructors
@@ -71,29 +60,28 @@ namespace AppTesteBinding.ViewModels
             }
         }
 
-        private async void AddFromAPI()
+        private async Task AddFromAPI()
         {
             CategoriasIsBusy = true;
-
-            App.Database.DeleteHistoriaMaragogi(); 
             
             HistoriaMaragogi = await new HistoriaMaragogiService().GetHistoriaMaragogi();
-
-            App.Database.SaveHistoriaMaragogi(HistoriaMaragogi);
 
             CategoriasIsBusy = false;
         }
 
-        private async void AddFromDatabase()
-        {
-            HistoriaMaragogi = await App.Database.GetHistoriaMaragogi();
-        }
-
-        private async void AddImagesFromAPIAsync()
+        private async Task AddImagesFromAPIAsync()
         {
             FotoIsBusy = true;
 
             Fotos = await new HistoriaMaragogiService().GetFotoFundo();
+
+            if (Fotos == null)
+            {
+                Fotos = new ObservableCollection<FotosEstabelecimentos>
+                {
+                    new FotosEstabelecimentos { Foto = "fundooffline.png" }
+                };
+            }
 
             FotoIsBusy = false;
         }

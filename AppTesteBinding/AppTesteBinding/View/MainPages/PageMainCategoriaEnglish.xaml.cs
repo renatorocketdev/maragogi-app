@@ -53,7 +53,7 @@ namespace AppTesteBinding.View.MainPages.English
 
             Lista.SelectedItem = -1;
 
-            if (App.Database.HasEnterprises(Cateogoria.SubCategoria))
+            if (Lista != null)
             {
                 await Navigation.PushAsync(new SubCategoriasPage(Cateogoria.SubCategoria));
             }

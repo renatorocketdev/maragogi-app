@@ -56,11 +56,8 @@
     <Compile Update="View\MainPages\SubCategoriasPage.xaml.cs">
       <DependentUpon>SubCategoriasPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="View\Maragogi\PagePontoDetails.xaml.cs">
-      <DependentUpon>PagePontoDetails.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="View\Maragogi\PagePraiaDetails.xaml.cs">
-      <DependentUpon>PagePraiaDetails.xaml</DependentUpon>
+    <Compile Update="View\Maragogi\PageMaragogiDetails.xaml.cs">
+      <DependentUpon>PageMaragogiDetails.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -89,16 +86,10 @@
     <EmbeddedResource Update="View\Maragogi\PageCategoriasMaragogi.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\Maragogi\PagePontoDetails.xaml">
+    <EmbeddedResource Update="View\Maragogi\PageMaragogiDetails.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\Maragogi\PageHistoriaMaragogiDetails.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\Maragogi\PagePraias.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\Maragogi\PagePraiaDetails.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\Standard\Login.xaml">

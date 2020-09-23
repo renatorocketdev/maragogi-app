@@ -7,18 +7,26 @@ using Xamarin.Forms.Xaml;
 namespace AppTesteBinding.View.Maragogi
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PagePraiaDetails : ContentPage
+    public partial class PageMaragogiDetails : ContentPage
     {
-        public PagePraiaDetails(Praias praias)
+        #region Constructors
+
+        public PageMaragogiDetails(CategoriaMaragogi categoriaMaragogi)
         {
             InitializeComponent();
 
-            BindingContext = new PraiasDetailsViewModel(praias);
+            BindingContext = new CategoriasMaragogiDetailsViewModel(categoriaMaragogi);
         }
+
+        #endregion Constructors
+
+        #region Methods
 
         private void ImageButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PopAsync();
         }
+
+        #endregion Methods
     }
 }

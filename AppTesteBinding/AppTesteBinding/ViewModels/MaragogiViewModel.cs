@@ -1,59 +1,53 @@
-﻿using AppTesteBinding.Models;
-using System.Collections.Generic;
+﻿using AppTesteBinding.Data;
+using AppTesteBinding.Models;
+using AppTesteBinding.Service.Modulo;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace AppTesteBinding.ViewModels
 {
-    internal class MaragogiViewModel
+    internal class MaragogiViewModel : Manager<CategoriaMaragogi>
     {
-        #region Fields
-
-        public List<CategoriaMaragogi> ListLocal { get; set; }
-
-        #endregion Fields
-
-        #region Constructors
+        public ICommand CmdPopAsync { get { return new Command(async () => await PopAsync()); } }
 
         public MaragogiViewModel()
         {
-            ListLocal = new List<CategoriaMaragogi>()
+            _ = AddFromAPIAsync();
+        }
+
+        private async Task AddFromAPIAsync()
+        {
+            CategoriasIsBusy = true;
+
+            var list = await new Service<CategoriaMaragogi>().Get("APICategoriasMaragogi");
+
+            ObservableCollectionLocal = new ObservableCollection<CategoriaMaragogi>()
             {
                 new CategoriaMaragogi
                 {
-                    Foto = "menumaragogi",
                     Nome = "História"
                 },
                 new CategoriaMaragogi
                 {
-                    Foto = "menumaragogi",
-                    Nome = "Pontos Turísticos"
+                    Nome = "Praias"
                 },
                 new CategoriaMaragogi
                 {
-                    Foto = "menumaragogi",
-                    Nome = "Praias"
+                    Nome = "Pontos Turísticos"
                 }
             };
+
+            list.ForEach(x => ObservableCollectionLocal.Add(x));
+
+            CategoriasIsBusy = false;
         }
-
-        #endregion Constructors
-
-        #region Properties
-
-        public ICommand CmdPopAsync { get { return new Command(async () => await PopAsync()); } }
-
-        #endregion Properties
-
-        #region Methods
 
         private async Task PopAsync()
         {
             await Application.Current.MainPage.Navigation.PopAsync();
         }
-
-        #endregion Methods
-
     }
 }
