@@ -37,6 +37,7 @@ namespace AppTesteBinding.ViewModels
 
         public CategoriasMaragogiDetailsViewModel(CategoriaMaragogi categoriaMaragogi)
         {
+            HasVideo = !string.IsNullOrEmpty(categoriaMaragogi.UrlVideo);
             CategoriaMaragogiLocal = categoriaMaragogi;
 
             CmdTirarFoto = new Command<CategoriaMaragogi>(async (x) => await TirarFoto());

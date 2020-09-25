@@ -33,6 +33,7 @@ namespace AppTesteBinding.Models
         private bool _FotoIsBusy;
         private bool _HasNoEnteprises;
         private bool _Portuguese;
+        private bool _HasVideo;
         private string _Categoria;
 
         #endregion Fields
@@ -96,6 +97,12 @@ namespace AppTesteBinding.Models
         {
             get { return _Portuguese; }
             set { _Portuguese = value; OnPropertyChanged(nameof(Portuguese)); }
+        }
+
+        public bool HasVideo
+        {
+            get { return _HasVideo; }
+            set { _HasVideo = value; OnPropertyChanged(nameof(HasVideo)); }
         }
 
         #endregion Properties

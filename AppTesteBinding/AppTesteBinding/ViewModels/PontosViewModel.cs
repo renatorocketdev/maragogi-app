@@ -1,4 +1,5 @@
 ﻿using AppTesteBinding.Models;
+using AppTesteBinding.Service;
 using AppTesteBinding.Service.Modulo;
 using AppTesteBinding.View.Maragogi;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace AppTesteBinding.ViewModels
         public PontosViewModel()
         {
             _ = AddFromAPIAsync();
+            _ = AddImagesFromAPIAsync();
         }
 
         #endregion Constructors
@@ -32,9 +34,18 @@ namespace AppTesteBinding.ViewModels
         {
             CategoriasIsBusy = true;
 
-            ListLocal = await new Service<CategoriaMaragogi>().Get("APICategoriasMaragogi", "Categoria", "Pontos");
+            ListLocal = await new Service<CategoriaMaragogi>().Get("APICategoriasMaragogi", "Categoria", "Pontos Turísticos");
 
             CategoriasIsBusy = false;
+        }
+
+        private async Task AddImagesFromAPIAsync()
+        {
+            FotoIsBusy = true;
+
+            Fotos = await new MyServiceImage().GetImages("APIFotoCategoriasMaragogi", "tipo", "FundoPontoTuristico");
+
+            FotoIsBusy = false;
         }
 
         private async Task PopAsync()

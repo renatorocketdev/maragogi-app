@@ -151,7 +151,7 @@
 
                 <StackLayout Grid.Row="2" Margin="5">
                     <!--  Vídeo  -->
-                    <StackLayout Margin="5">
+                    <StackLayout Margin="5" IsVisible="{Binding HasVideo}">
                         <StackLayout Orientation="Horizontal">
                             <Label
                                 Margin="10"

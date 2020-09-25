@@ -20,17 +20,12 @@ namespace AppTesteBinding.ViewModels
 
                 AddFromAPIAsync();
             }
-            else if (false)
+            else
             {
                 Fotos = new ObservableCollection<FotosEstabelecimentos>
                 {
                     new FotosEstabelecimentos { Foto = "fundooffline.png" }
                 };
-            }
-            else
-            {
-                if (ListLocal.Count == 0)
-                    HasNoEnterprises = true;
             }
         }
 
@@ -51,7 +46,7 @@ namespace AppTesteBinding.ViewModels
         {
             FotoIsBusy = true;
 
-            Fotos = await new MyServiceImage().GetImages("APIFotoPraias");
+            Fotos = await new MyServiceImage().GetImages("APIFotoCategoriasMaragogi", "tipo", "FundoPraias");
 
             FotoIsBusy = false;
         }

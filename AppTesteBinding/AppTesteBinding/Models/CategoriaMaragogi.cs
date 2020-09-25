@@ -9,5 +9,6 @@
         public string UrlVideo { get; set; }
         public string Descricao { get; set; }
         public string Categoria { get; set; }
+
     }
 }
