@@ -282,7 +282,7 @@
                             FontAttributes="Bold"
                             FontFamily="{StaticResource HammerFatFont}"
                             FontSize="Title"
-                            Text="Sobre a Empresa"
+                            Text="Descrição"
                             TextColor="DarkSlateBlue" />
 
                         <BoxView
