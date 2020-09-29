@@ -32,7 +32,7 @@ namespace AppTesteBinding.Service.Modulo
         {
             using (var httpClient = new HttpClient())
             {
-                var response = await httpClient.GetAsync(ApiBaseAddress + "APIFotoHistoriaMaragogi");
+                var response = await httpClient.GetAsync(ApiBaseAddress + "/APIFotoHistoriaMaragogi");
 
                 if (response.IsSuccessStatusCode)
                 {
